@@ -1,4 +1,4 @@
-# \[Work In Progress\] AMWA NMOS Template Specification
+# \[Work In Progress\] AMWA BCP-00X-0X: Receiver status monitoring
 
 [![Lint Status](https://github.com/AMWA-TV/bcp-template/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ALint)
 [![Render Status](https://github.com/AMWA-TV/bcp-template/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ARender)
