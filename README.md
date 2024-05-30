@@ -1,4 +1,4 @@
-# \[Work In Progress\] AMWA NMOS Template Specification
+# \[Work In Progress\] AMWA BCP-00X-0X: Receiver status monitoring
 
 [![Lint Status](https://github.com/AMWA-TV/bcp-template/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ALint)
 [![Render Status](https://github.com/AMWA-TV/bcp-template/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ARender)
@@ -9,19 +9,18 @@ This repository holds the source for this Specification, part of the family of [
 
 ### What does it do?
 
-- It provides a template for AMWA NMOS Interface Specifcations.
+- It provides a standard way of monitoring the statuses of Receivers
 
 ### Why does it matter?
 
-- It helps ensure consistency between NMOS Specifications.
-- It helps us test our continuous integration.
+- It offers standard models for minimum status reporting
+- It provides guidance, sets out expectations and requirements for receiver status monitoring
 
 ### How does it work?
 
-- It contains examples of [documentation](docs/), and [examples](examples/)
-- It provides a style guide and other advice for specification authors
-  - This includes how to configure the repo for automatic linting and rendering to `specs.amwa.tv`
-- Select `AMWA-TV/bcp-template` as the template when creating the new repo.
+- It documents the standard models Devices have to use in order to offer receiver status monitoring
+- It lists the prerequisites and dependencies in terms of NMOS specifications
+- It describes the status monitoring domains along with expectations, behaviour and conformance requirements
 
 <!-- INTRO-END -->
 
