@@ -49,7 +49,9 @@ The technical model describing the monitoring requirements for a receiver is [Nc
 
 This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor)
 
-The purpose of the overall status is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client. The overall status might remain the same even when specific domain statuses change but the overall status message might change because a different combination of internal states is causing the current overall status value. A good practice is to populate the status message property with details of the worst status causing the current value of the overall status.
+The purpose of the overall status is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client. A good practice is to populate the status message property with details of the worst status causing the current value of the overall status.
+
+`Note`: The overall status might remain the same even when specific domain statuses change but the overall status message might change because a different combination of internal states is causing the current overall status value.
 
 The following recommendations are in place when mapping specific domain statuses in the combined overall status:
 
@@ -84,7 +86,7 @@ This includes the following specific items which cover the connectivity domain:
 
 ### Link status monitoring
 
-Link status monitoring allows devices to expose the health of all the links associated with the receiver.
+Link status monitoring allows devices to expose the health of all the physical links associated with the receiver.
 
 Devices specify if:
 
@@ -98,18 +100,20 @@ The link status message is an optional nullable property where devices can offer
 
 Connection status monitoring allows devices to expose the health of the receiver with regards to receiving stream packets successfully.
 
+`Note`: Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connection status.
+
 Devices specify:
 
 * When the receiver is Inactive (is a neutral state)
 * Healthy when the receiver is Active and receiving packets without using any form of loss recovery
-* PartiallyHealthy when the receiver is Active and is receiving packets but some form of loss recovery is being used (redundant leg recovery or some form of FEC)
-* Unhealthy when the receiver is active and is receiving packets but has unrecoverable errors
+* PartiallyHealthy when the receiver is Active and is receiving packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
+* Unhealthy when the receiver is active and is either not receiving any packets or receiving packets but has unrecoverable errors
 
 The connection status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
 ### Late and lost packets
 
-The receiver monitoring model provides means of gathering metrics around late and lost packets. These are not statuses but instead enable further analysis when [link status](#link-status-monitoring) or [connection status](#connection-status-monitoring) indicate problems.
+The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when [link status](#link-status-monitoring) or [connection status](#connection-status-monitoring) indicate problems.
 
 The feature is expressed with the following methods:
 
