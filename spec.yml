@@ -1,10 +1,10 @@
-amwa_id: BCP-TEMPLATE
-url: https://specs.amwa.tv/bcp-template
-name: AMWA NMOS Best Common Practice Template
-status: Continuing
-repo_name: bcp-template
-alt_repo_name: nmos-bcp-template
-repo_url: https://github.com/AMWA-TV/bcp-template
+amwa_id: BCP-008-01
+url: https://specs.amwa.tv/bcp-008-01
+name: AMWA NMOS Receiver Status
+status: Work In Progress
+repo_name: bcp-008-01
+alt_repo_name: bcp-receiver-status
+repo_url: https://github.com/AMWA-TV/bcp-008-01
 releases:
-default_branch: main
-show_in_index: false
+default_branch: v1.0-dev
+show_in_index: true

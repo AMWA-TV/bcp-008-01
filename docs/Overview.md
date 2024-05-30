@@ -1,4 +1,4 @@
-# AMWA BCP-00X-0X: Receiver status monitoring
+# AMWA BCP-008-01: Receiver status monitoring
 {:.no_toc}
 
 * A markdown unordered list which will be replaced with the ToC, excluding the "Contents header" from above

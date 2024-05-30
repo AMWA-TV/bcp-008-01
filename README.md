@@ -1,7 +1,7 @@
-# \[Work In Progress\] AMWA BCP-00X-0X: Receiver status monitoring
+# \[Work In Progress\] AMWA BCP-008-01: Receiver status monitoring
 
-[![Lint Status](https://github.com/AMWA-TV/bcp-template/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ALint)
-[![Render Status](https://github.com/AMWA-TV/bcp-template/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ARender)
+[![Lint Status](https://github.com/AMWA-TV/bcp-008-01/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-008-01/actions?query=workflow%3ALint)
+[![Render Status](https://github.com/AMWA-TV/bcp-008-01/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-008-01/actions?query=workflow%3ARender)
 
 This repository holds the source for this Specification, part of the family of [Networked Media Open Specifications](https://specs.amwa.tv/nmos) from the [Advanced Media Workflow Association](https://amwa.tv)
 
