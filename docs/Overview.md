@@ -43,21 +43,9 @@ Devices in conformance to this BCP MUST use [NMOS Control Protocol](https://spec
 Devices in conformance to this BCP MUST use [NMOS Discovery and Registration](https://specs.amwa.tv/is-04/) to create and register Nodes, Devices and Receiver resources.  
 Devices in conformance to this BCP MUST use [NMOS Device Connection Management](https://specs.amwa.tv/is-05/) to perform connection management actions against Receiver resources.  
 
-## Receiver overall status
+## Receiver status
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).
-
-This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor)
-
-The purpose of the overall status is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client. A good practice is to populate the status message property with details of the worst status causing the current value of the overall status.
-
-`Note`: The overall status might remain the same even when specific domain statuses change but the overall status message might change because a different combination of internal states is causing the current overall status value.
-
-The following recommendations are in place when mapping specific domain statuses in the combined overall status:
-
-* Inactive/Not used states are neutral and do no affect the overall status
-* The overall status takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overall status would be Unhealthy)
-* The overall status is Healthy only when all domain statuses are either Healthy or a neutral state (Inactive/Not used)
+The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  The Receiver status is composed of an overall status and various `domain statuses` such as link status, connection status, synchronisation status and stream status.  These are described below.
 
 The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
 
@@ -65,10 +53,27 @@ The proposed models are minimal and they can be implemented as is or derived in 
 |:--:|
 | _**Receiver monitoring model**_ |
 
-## Receiver connectivity
+### Receiver overall status
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the connectivity domain:
+This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor), which represents the overall status.
+
+The purpose of the overall status is to abstract and combine the the domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client.
+
+NcStatusMonitor consists of the `overallStatus` enumeration property and the `overallStatusMessage` string property.
+
+The following recommendations are in place when mapping specific domain statuses into the `overallStatus` enumeration property:
+
+* Inactive/Not used states are neutral and do no affect the overall status
+* The overall status takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overall status would be Unhealthy)
+* The overall status is Healthy only when all domain statuses are either Healthy or a neutral state (Inactive/Not used)
+
+It is good practice is to populate the `overallStatusMessage` property with details of the "worst status" causing the current value of the overall status.  For statuses causing the current value of the overall status, a link status is considered a worst status than a connection status, which is considered a worst status than a synchronisation status, which is in turn considered a worst status than a stream status.
+
+`Note`: The `overallStatus` might remain the same even when specific domain statuses change but the overall status message might change because a different combination of internal states is causing the current overall status value.
+
+### Receiver connectivity
+
+The connectivity domain statuses of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) are as follows:
 
 * Properties
   * linkStatus
@@ -84,34 +89,35 @@ This includes the following specific items which cover the connectivity domain:
 |:--:|
 | _**Receiver connectivity**_ |
 
-### Link status monitoring
+#### Link status monitoring
 
 Link status monitoring allows devices to expose the health of all the physical links associated with the receiver.
 
 Devices specify if:
 
-* All interfaces are Down (equivalent to an Unhealthy state)
-* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
+(*Reordered to be consistent with the linkStatus enumeration*)
 * All of the interfaces are Up (equivalent to a Healthy state)
+* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
+* All interfaces are Down (equivalent to an Unhealthy state)
 
-The link status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The `linkStatusMessage` is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
-### Connection status monitoring
+#### Connection status monitoring
 
 Connection status monitoring allows devices to expose the health of the receiver with regards to receiving stream packets successfully.
 
 `Note`: Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connection status.
 
-Devices specify:
+The `connectionStatus` property has the following enumeration values:
 
-* When the receiver is Inactive (is a neutral state)
-* Healthy when the receiver is Active and receiving packets without using any form of loss recovery
-* PartiallyHealthy when the receiver is Active and is receiving packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
-* Unhealthy when the receiver is active and is either not receiving any packets or receiving packets but has unrecoverable errors
+* Inactive - The receiver is Inactive (is a neutral state)
+* Healthy - The receiver is Active and receiving packets without using any form of loss recovery
+* PartiallyHealthy - The receiver is Active and is receiving packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
+* Unhealthy - The receiver is active and is either not receiving any packets or receiving packets but has unrecoverable errors
 
-The connection status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The `connectionStatusMessage` is an optional nullable string property where devices can offer the reason and further details as to why the current status value was chosen.
 
-### Late and lost packets
+#### Late and lost packets
 
 The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when [link status](#link-status-monitoring) or [connection status](#connection-status-monitoring) indicate problems.
 
@@ -121,10 +127,9 @@ The feature is expressed with the following methods:
 * GetLatePackets - returns a numeric value of the late packets
 * ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
 
-## Receiver synchronization
+### Receiver synchronization
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the synchronization domain:
+The synchronization domain statuses of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) are as follows:
 
 * Properties
   * synchronizationStatus
@@ -135,29 +140,29 @@ This includes the following specific items which cover the synchronization domai
 |:--:|
 | _**Receiver synchronization**_ |
 
-### Synchronization status monitoring
+#### Synchronization status monitoring
 
 Synchronization status monitoring allows devices to expose the health of the receiver with regards to its time synchronization mechanisms.
 
 Devices specify:
 
-* When the receiver is not using external synchronization (is a neutral state)
-* When the receiver is baseband locked (is equivalent to a Healthy state)
-* When the receiver is partially baseband locked (is equivalent to a PartiallyHealthy state)
-* When the receiver is network locked (is equivalent to a Healthy state)
-* When the receiver is partially network locked (is equivalent to a PartiallyHealthy state)
-* When the receiver is not locked (is equivalent to an Unhealthy state)
+(*I think the text from the diagrams should be placed in these bullets (and expanded if necessary) as it feels more 'normative'*)
+* NotUsed - the receiver is not using external synchronization (is a neutral state)
+* BasebandLocked - the receiver is baseband locked (is equivalent to a Healthy state)
+* BasebandPartiallyLocked - the receiver is partially baseband locked (is equivalent to a PartiallyHealthy state)
+* NetworkLocked - the receiver is network locked (is equivalent to a Healthy state)
+* NetworkPartiallyLocked - the receiver is partially network locked (is equivalent to a PartiallyHealthy state)
+* NotLocked - the receiver is not locked to any timing source (is equivalent to an Unhealthy state)
 
 The synchronization status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
-### Grandmaster change
+#### Grandmaster change
 
 When devices are configured to use network synchronization they MUST publish the grandmaster clock id currently being used and update the property whenever it changes. For devices which are not using network synchronization this property MUST be set to `null`.
 
-## Receiver stream validation
+### Receiver stream validation
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the stream validation domain:
+The stream validation domain statuses of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) are as follows:
 
 * Properties
   * streamStatus
@@ -167,15 +172,15 @@ This includes the following specific items which cover the stream validation dom
 |:--:|
 | _**Receiver stream validation**_ |
 
-### Stream status monitoring
+#### Stream status monitoring
 
 Stream status monitoring allows devices to expose the health of the receiver with regards to the validity of the stream being received.
 
 Devices specify:
 
-* When the receiver is Inactive (is a neutral state)
-* Healthy when the receiver is Active and can decode the incoming stream without any errors
-* PartiallyHealthy when the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting
-* Unhealthy when the receiver is active and cannot decode the incoming stream
+* Inactive - when the receiver is inactive (is a neutral state)
+* Healthy - the receiver is Active and can decode the incoming stream without any errors
+* PartiallyHealthy - the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting
+* Unhealthy - the receiver is active and cannot decode the incoming stream
 
-The stream status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The `streamStatusMessage` is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
