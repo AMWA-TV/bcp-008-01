@@ -117,8 +117,8 @@ The receiver monitoring model provides means of gathering metrics around late an
 
 The feature is expressed with the following methods:
 
-* GetLostPackets - returns a numeric value of the lost packets
-* GetLatePackets - returns a numeric value of the late packets
+* GetLostPackets - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
+* GetLatePackets - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
 * ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
 
 ## Receiver synchronization
@@ -129,7 +129,7 @@ This includes the following specific items which cover the synchronization domai
 * Properties
   * synchronizationStatus
   * synchronizationStatusMessage
-  * grandMasterClockId
+  * synchronizationSourceId
 
 | ![Receiver synchronization](images/receiver-model-synchronization.png) |
 |:--:|
@@ -150,9 +150,9 @@ Devices specify:
 
 The synchronization status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
-### Grandmaster change
+### Synchronization source change
 
-When devices are configured to use network synchronization they MUST publish the grandmaster clock id currently being used and update the property whenever it changes. For devices which are not using network synchronization this property MUST be set to `null`.
+When devices are configured to use synchronization they MUST publish the synchronization source id currently being used and update the property whenever it changes, using `null` if a synchronization source cannot be discovered. For devices which are not using synchronization this property MUST be set to `null`.
 
 ## Receiver stream validation
 
