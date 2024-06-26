@@ -53,11 +53,12 @@ The purpose of the overall status is to abstract and combine the specific domain
 
 `Note`: The overall status might remain the same even when specific domain statuses change but the overall status message might change because a different combination of internal states is causing the current overall status value.
 
-The following recommendations are in place when mapping specific domain statuses in the combined overall status:
+Devices MUST follow the rules listed below when mapping specific domain statuses in the combined overall status:
 
-* Inactive/Not used states are neutral and do no affect the overall status
-* The overall status takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overall status would be Unhealthy)
-* The overall status is Healthy only when all domain statuses are either Healthy or a neutral state (Inactive/Not used)
+* When the Receiver is Inactive the overall status uses the Inactive option
+* When the Receiver is Active the overall status takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overall status would be Unhealthy)
+* The overall status is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used)
+* When activating a Receiver, it is expected for devices to go through a period of instability when connecting to the new stream. The overall status transitions immediately to a Healthy state and delays the reporting of errors for a configurable amount of time (devices use 5s as the default activation error reporting delay - the means by which this default value can be changed is not in scope of this API specification and MUST be documented in the product user guide) after which it can transition to PartiallyHealthy or Unhealthy by taking the worst state across the different domains.
 
 The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
 
@@ -117,8 +118,8 @@ The receiver monitoring model provides means of gathering metrics around late an
 
 The feature is expressed with the following methods:
 
-* GetLostPackets - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
-* GetLatePackets - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
+* GetLostPacketCounters - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
+* GetLatePacketCounters - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
 * ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
 
 ## Receiver synchronization
