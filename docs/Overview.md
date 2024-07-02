@@ -58,7 +58,7 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 * When the Receiver is Inactive the overall status uses the Inactive option
 * When the Receiver is Active the overall status takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overall status would be Unhealthy)
 * The overall status is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used)
-* When activating a Receiver, it is expected for devices to go through a period of instability when connecting to the new stream. The overall status transitions immediately to a Healthy state and delays the reporting of errors for a configurable amount of time (devices use 5s as the default activation error reporting delay - the means by which this default value can be changed is not in scope of this API specification and MUST be documented in the product user guide) after which it can transition to PartiallyHealthy or Unhealthy by taking the worst state across the different domains.
+* When activating a Receiver, it is expected for devices to go through a period of instability when connecting to the new stream. The overall status transitions immediately to a Healthy state and delays the reporting of errors for a configurable amount of time (devices use 5s as the default overall status reporting delay) after which it can transition to PartiallyHealthy or Unhealthy by taking the worst state across the different domains.
 
 The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
 
@@ -108,7 +108,7 @@ Devices specify:
 * When the receiver is Inactive (is a neutral state)
 * Healthy when the receiver is Active and receiving packets without using any form of loss recovery
 * PartiallyHealthy when the receiver is Active and is receiving packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
-* Unhealthy when the receiver is active and is either not receiving any packets or receiving packets but has unrecoverable errors
+* Unhealthy when the receiver is Active and is either not receiving any packets or receiving packets but has unrecoverable errors
 
 The connection status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
@@ -143,11 +143,9 @@ Synchronization status monitoring allows devices to expose the health of the rec
 Devices specify:
 
 * When the receiver is not using external synchronization (is a neutral state)
-* When the receiver is baseband locked (is equivalent to a Healthy state)
-* When the receiver is partially baseband locked (is equivalent to a PartiallyHealthy state)
-* When the receiver is network locked (is equivalent to a Healthy state)
-* When the receiver is partially network locked (is equivalent to a PartiallyHealthy state)
-* When the receiver is not locked (is equivalent to an Unhealthy state)
+* When the receiver synchronization status is healthy (locked to a synchronization source)
+* When the receiver synchronization status is partially healthy (partially locked to a synchronization source)
+* When the receiver synchronization status is unhealthy (not locked to a synchronization source)
 
 The synchronization status message is an optional nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
