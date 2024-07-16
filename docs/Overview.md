@@ -100,9 +100,9 @@ Link status monitoring allows devices to expose the health of all the physical l
 
 Devices specify if:
 
-* All interfaces are Down (equivalent to an Unhealthy state)
-* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
 * All of the interfaces are Up (equivalent to a Healthy state)
+* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
+* All interfaces are Down (equivalent to an Unhealthy state)
 
 The link status message is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
