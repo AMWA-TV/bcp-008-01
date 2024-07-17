@@ -230,7 +230,7 @@ Unexpected stream format
 Parameter X does not match expectations
 ```
 
-### Deactivating a receiver
+## Deactivating a receiver
 
 A Receiver is deactivated after an [IS-05 activation](https://specs.amwa.tv/is-05/latest/docs/Interoperability_-_IS-04.html#identifying-active-connections) results in the Receiver `master_enable` becoming `false`.
 
