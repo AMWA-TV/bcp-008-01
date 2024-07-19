@@ -106,7 +106,7 @@ Devices specify if:
 
 The linkStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
-Devices are recommended to publish information about which interfaces are down in the linkStatusMessage.
+Devices are RECOMMENDED to publish information about which interfaces are down in the linkStatusMessage.
 
 Example:
 
