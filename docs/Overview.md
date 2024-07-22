@@ -291,6 +291,6 @@ When a receiver is being deactivated it MUST cleanly disconnect from the current
 * overallStatus
 * connectionStatus
 * streamStatus
->Alain: I think we should mandate that the `externalSynchronizationStatus` transition to NotUsed when the Receiver is inactive.
+>Alain: I think we should mandate that the `externalSynchronizationStatus` transition to NotUsed when the Receiver is inactive or have a proper Inactive state.
 
 >Alain: General comments: 1) we should indicate if constraints are allowed on the read-write properties and to what extent. 2) The method ApproveCurrentSynchronizationSource should be named ApproveSynchronizationSource and receive a `synchronizationSourceId` as a parameter. It should be defined if the device maintain only one approved source id or many and then how many of them and how to clear such a list of approved ones.
