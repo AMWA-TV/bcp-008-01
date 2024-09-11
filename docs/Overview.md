@@ -148,8 +148,9 @@ This includes the following specific items which cover the synchronization domai
   * externalSynchronizationStatus
   * externalSynchronizationStatusMessage
   * synchronizationSourceId
+  * synchronizationSourceChanges
 * Methods
-  * ApproveCurrentSynchronizationSource
+  * ResetSynchronizationSourceChanges
 
 | ![Receiver synchronization](images/receiver-model-synchronization.png) |
 |:--:|
@@ -161,10 +162,10 @@ The externalSynchronizationStatus property allows devices to expose the health o
 
 Devices specify:
 
-* When the receiver is not using external synchronization (is a neutral state)
-* When the receiver external synchronization status is healthy (locked to an approved external synchronization source)
-* When the receiver external synchronization status is partially healthy (locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization or suffered a sync source transition)
-* When the receiver external synchronization status is unhealthy (is expected to use external synchronization but is not locked to any external synchronization source)
+* Not used - when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
+* Healthy - when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
+* Partially healthy - when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
+* Unhealthy - when the receiver is expected to use external synchronization but is not locked to any external synchronization source
 
 The externalSynchronizationStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
@@ -184,13 +185,16 @@ previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:
 
 ### Synchronization source change
 
-When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used and update the property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal`.
+When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
-When devices suffer a synchronization source change the externalSynchronizationStatus property MUST transition to a `PartiallyUnhealthy` state and stay there unless the following conditions apply:
+When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely.
 
-* A client invokes the ApproveCurrentSynchronizationSource and therefore the receiver can transition externalSynchronizationStatus to `Healthy` if there are no other synchronization issues
-* The receiver is Activated and therefore MUST approve the current sync source and transition externalSynchronizationStatus to `Healthy` if there are no other synchronization issues
-* The device returns to using the previous sync source and therefore can transition externalSynchronizationStatus to `Healthy` if there are no other synchronization issues
+Devices MUST report any synchronization source change as an increment to the `synchronizationSourceChanges` counter property.
+
+Devices MUST be able to reset the `synchronizationSourceChanges` counter property in the following two ways:
+
+* A receiver activation occurs
+* A client invokes the `ResetSynchronizationSourceChanges` method
 
 ## Receiver stream validation
 
