@@ -193,8 +193,8 @@ Devices MUST report any synchronization source change as an increment to the `sy
 
 Devices MUST be able to reset the `synchronizationSourceChanges` counter property in the following two ways:
 
-* A receiver activation occurs
-* A client invokes the `ResetSynchronizationSourceChanges` method
+* When a receiver activation occurs
+* When a client invokes the `ResetSynchronizationSourceChanges` method
 
 ## Receiver stream validation
 
