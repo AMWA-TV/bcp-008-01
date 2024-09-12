@@ -92,7 +92,7 @@ This includes the following specific items which cover the connectivity domain:
 
 | ![Receiver connectivity](images/receiver-model-connectivity.png) |
 |:--:|
-| _**Receiver connectivity**_ |
+| _**Receiver connectivity (explanatory notes are informative)**_ |
 
 ### Link status
 
@@ -154,13 +154,13 @@ This includes the following specific items which cover the synchronization domai
 
 | ![Receiver synchronization](images/receiver-model-synchronization.png) |
 |:--:|
-| _**Receiver synchronization**_ |
+| _**Receiver synchronization (explanatory notes are informative)**_ |
 
 ### External synchronization status
 
 The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its time synchronization mechanisms.
 
-Devices specify:
+Devices MUST specify:
 
 * Not used - when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
 * Healthy - when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
@@ -209,7 +209,7 @@ This includes the following specific items which cover the stream validation dom
 
 | ![Receiver stream validation](images/receiver-model-stream-validation.png) |
 |:--:|
-| _**Receiver stream validation**_ |
+| _**Receiver stream validation (explanatory notes are informative)**_ |
 
 ### Stream status
 
