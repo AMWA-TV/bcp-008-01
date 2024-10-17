@@ -49,11 +49,25 @@ Devices in conformance to this BCP MUST use [NMOS Control Protocol](https://spec
 Devices in conformance to this BCP MUST use [NMOS Discovery and Registration](https://specs.amwa.tv/is-04/) to create and register Nodes, Devices and Receiver resources.  
 Devices in conformance to this BCP MUST use [NMOS Device Connection Management](https://specs.amwa.tv/is-05/) to perform connection management actions against Receiver resources.  
 
-## Receiver overall status
+## Receiver monitoring
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).
 
 This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor)
+
+The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
+
+| ![Receiver monitoring model](images/receiver-model-minimal.png) |
+|:--:|
+| _**Receiver monitoring model**_ |
+
+The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
+
+* A receiver is expected to go through a period of instability upon activation. Therefore, on Receiver activation domain specific statuses offering an `Inactive` option MUST transition immediately to the Healthy state. Furthermore, after activation they MUST delay the reporting of non Healthy states for the duration specified by `statusReportingDelay`, as long as the Receiver isn't being [deactivated](#deactivating-a-receiver), and then transition to any other appropriate state.
+
+* Once any Receiver activation `statusReportingDelay` has elapsed and the Receiver isn't being [deactivated](#deactivating-a-receiver), all domain specific statuses MUST delay the transition to a more healthy state by the configured `statusReportingDelay` value and MUST only make the transition if the healthier state is maintained for the duration. All domain specific statuses MUST make a transition to a less healthy state as soon as possible.
+
+### Receiver overall status
 
 The purpose of the overallStatus is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client.
 
@@ -64,17 +78,8 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 * When the Receiver is Inactive the overallStatus uses the Inactive option
 * When the Receiver is Active the overallStatus takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overallStatus would be Unhealthy)
 * The overallStatus is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used)
-* When activating a Receiver, it is expected for devices to go through a period of instability when connecting to the new stream. The overallStatus transitions immediately to a Healthy state and delays the reporting of errors for a configurable amount of time (see `statusReportingDelay`) after which it can transition to PartiallyHealthy or Unhealthy by taking the worst state across the different domains.
 
-The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value. All status reporting properties MUST delay the transition to a more healthy state by the configured `statusReportingDelay` value and MUST only make the transition if the healthier state is maintained for the duration (this does not apply when starting from neutral values like Inactive or NotUsed where devices MUST make an immediate transition). All status reporting properties MUST make a transition to a less healthy state as soon as possible.
-
-The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
-
-| ![Receiver monitoring model](images/receiver-model-minimal.png) |
-|:--:|
-| _**Receiver monitoring model**_ |
-
-## Receiver connectivity
+### Receiver connectivity
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
 This includes the following specific items which cover the connectivity domain:
@@ -94,7 +99,7 @@ This includes the following specific items which cover the connectivity domain:
 |:--:|
 | _**Receiver connectivity (explanatory notes are informative)**_ |
 
-### Link status
+#### Link status
 
 The linkStatus property allows devices to expose the health of all the physical links associated with the receiver.
 
@@ -114,7 +119,7 @@ Example:
 NIC1, NIC2 are down
 ```
 
-### Connection status
+#### Connection status
 
 The connectionStatus property allows devices to expose the health of the receiver with regards to receiving stream packets successfully. Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connectionStatus.
 
@@ -127,19 +132,19 @@ Devices specify:
 
 The connectionStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
 
-### Late and lost packets
+#### Late and lost packets
 
 The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when [link status](#link-status) or [connection status](#connection-status) indicate problems (are PartiallyHealthy or Unhealthy).
 
 The feature is expressed with the following methods:
 
-* GetLostPacketCounters - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
-* GetLatePacketCounters - returns a collection of counters which hold the name and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
+* GetLostPacketCounters - returns a collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
+* GetLatePacketCounters - returns a collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
 * ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
 
 The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation.
 
-## Receiver synchronization
+### Receiver synchronization
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
 This includes the following specific items which cover the synchronization domain:
@@ -156,7 +161,7 @@ This includes the following specific items which cover the synchronization domai
 |:--:|
 | _**Receiver synchronization (explanatory notes are informative)**_ |
 
-### External synchronization status
+#### External synchronization status
 
 The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its time synchronization mechanisms.
 
@@ -185,7 +190,7 @@ or
 previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:0a:2b:a1 from NIC2
 ```
 
-### Synchronization source change
+#### Synchronization source change
 
 When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
@@ -198,7 +203,7 @@ Devices MUST be able to reset the `synchronizationSourceChanges` counter propert
 * When a receiver activation occurs
 * When a client invokes the `ResetSynchronizationSourceChanges` method
 
-## Receiver stream validation
+### Receiver stream validation
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
 This includes the following specific items which cover the stream validation domain:
@@ -211,7 +216,7 @@ This includes the following specific items which cover the stream validation dom
 |:--:|
 | _**Receiver stream validation (explanatory notes are informative)**_ |
 
-### Stream status
+#### Stream status
 
 The streamStatus property allows devices to expose the health of the receiver with regards to the validity of the stream being received.
 
@@ -238,11 +243,11 @@ Payload ID in RTP stream does not match SDP file
 Parameter X does not match expectations
 ```
 
-## Deactivating a receiver
+### Deactivating a receiver
 
 A Receiver is deactivated after an [IS-05 activation](https://specs.amwa.tv/is-05/latest/docs/Interoperability_-_IS-04.html#identifying-active-connections) results in the Receiver `master_enable` becoming `false`.
 
-When a receiver is being deactivated it MUST cleanly disconnect from the current stream by not generating intermediate unhealthy states (PartiallyHealthy or Unhealthy) and instead transition directly to `Inactive` for the following statuses:
+When a receiver is being deactivated it MUST cleanly disconnect from the current stream by not generating intermediate unhealthy states (PartiallyHealthy or Unhealthy) and instead transition directly and immediately (without being delayed by the `statusReportingDelay`) to `Inactive` for the following statuses:
 
 * overallStatus
 * connectionStatus
