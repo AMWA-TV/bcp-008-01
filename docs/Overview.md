@@ -53,13 +53,15 @@ Devices in conformance to this BCP MUST use [NMOS Device Connection Management](
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).
 
-This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor)
+This model inherits from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor).
 
-The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
+For implementations to be in conformance with the BCP they MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) directly or as a [vendor specific variant derived from NcReceiverMonitor](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
 
 | ![Receiver monitoring model](images/receiver-model-minimal.png) |
 |:--:|
 | _**Receiver monitoring model**_ |
+
+### Receiver status reporting delay
 
 The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
 
@@ -81,8 +83,7 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 
 ### Receiver connectivity
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the connectivity domain:
+[NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) includes the following specific items covering the connectivity domain:
 
 * Properties
   * linkStatus
@@ -103,13 +104,13 @@ This includes the following specific items which cover the connectivity domain:
 
 The linkStatus property allows devices to expose the health of all the physical links associated with the receiver.
 
-Devices specify if:
+Devices MUST report the linkStatus as follows:
 
-* All of the interfaces are Up (equivalent to a Healthy state)
-* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
-* All interfaces are Down (equivalent to an Unhealthy state)
+* AllUp when all of the interfaces are Up (equivalent to a Healthy state)
+* SomeDown when some of the interfaces are Down (equivalent to a PartiallyHealthy state)
+* AllDown when all interfaces are Down (equivalent to an Unhealthy state)
 
-The linkStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The linkStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
 Devices are RECOMMENDED to publish information about which interfaces are down in the linkStatusMessage.
 
