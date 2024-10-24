@@ -136,6 +136,8 @@ The connectionStatusMessage is a nullable property where devices can offer the r
 
 The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when [link status](#link-status) or [connection status](#connection-status) indicate problems (are PartiallyHealthy or Unhealthy).
 
+Lost packets are packets that never arrived. Late packets are packets that arrived but arrived too late to be usable by the essence reconstruction process without increasing the link offset delay.
+
 The feature is expressed with the following methods:
 
 * GetLostPacketCounters - returns a collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
@@ -143,6 +145,8 @@ The feature is expressed with the following methods:
 * ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
 
 The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation.
+
+For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
 ### Receiver synchronization
 
