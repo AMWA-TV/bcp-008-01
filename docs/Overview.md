@@ -53,13 +53,15 @@ Devices in conformance to this BCP MUST use [NMOS Device Connection Management](
 
 The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).
 
-This model MUST inherit from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor)
+This model inherits from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor).
 
-The proposed models are minimal and they can be implemented as is or derived in [vendor specific variants](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
+For implementations to be in conformance with the BCP they MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) directly or as a [vendor specific variant derived from NcReceiverMonitor](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
 
 | ![Receiver monitoring model](images/receiver-model-minimal.png) |
 |:--:|
 | _**Receiver monitoring model**_ |
+
+### Receiver status reporting delay
 
 The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
 
@@ -81,8 +83,7 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 
 ### Receiver connectivity
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the connectivity domain:
+[NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) includes the following specific items covering the connectivity domain:
 
 * Properties
   * linkStatus
@@ -103,13 +104,13 @@ This includes the following specific items which cover the connectivity domain:
 
 The linkStatus property allows devices to expose the health of all the physical links associated with the receiver.
 
-Devices specify if:
+Devices MUST report the linkStatus as follows:
 
-* All of the interfaces are Up (equivalent to a Healthy state)
-* Some of the interfaces are Down (equivalent to a PartiallyHealthy state)
-* All interfaces are Down (equivalent to an Unhealthy state)
+* AllUp when all of the interfaces are Up (equivalent to a Healthy state)
+* SomeDown when some of the interfaces are Down (equivalent to a PartiallyHealthy state)
+* AllDown when all interfaces are Down (equivalent to an Unhealthy state)
 
-The linkStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The linkStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
 Devices are RECOMMENDED to publish information about which interfaces are down in the linkStatusMessage.
 
@@ -123,14 +124,14 @@ NIC1, NIC2 are down
 
 The connectionStatus property allows devices to expose the health of the receiver with regards to receiving stream packets successfully. Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connectionStatus.
 
-Devices specify:
+Devices MUST report the connectionStatus as follows:
 
-* When the receiver is Inactive (is a neutral state)
+* Inactive when the receiver is Inactive (this is a neutral state)
 * Healthy when the receiver is Active and receiving all required packets without using any form of loss recovery
 * PartiallyHealthy when the receiver is Active and is receiving all required packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
 * Unhealthy when the receiver is Active and is either not receiving any packets or receiving packets but has unrecoverable errors (such as late or lost packets)
 
-The connectionStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The connectionStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
 #### Late and lost packets
 
@@ -138,20 +139,26 @@ The receiver monitoring model provides means of gathering metrics around late an
 
 Lost packets are packets that never arrived. Late packets are packets that arrived but arrived too late to be usable by the essence reconstruction process without increasing the link offset delay.
 
-The feature is expressed with the following methods:
+Devices with capabilities to detect late or lost packets MUST implement the following methods:
 
-* GetLostPacketCounters - returns a collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
-* GetLatePacketCounters - returns a collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
-* ResetPacketCounters - allows a client application to reset both the Lost and Late packet counters to 0.
+* GetLostPacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
+* GetLatePacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
+* ResetPacketCounters - resets both the Lost and Late packet counters to 0.
 
 The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation.
 
 For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
+Devices MUST be compliant with the monitoring model even when they do not have the capability to detect lost or late packets. In such cases they MUST:
+
+* Implement the GetLostPacketCounters method but return an empty collection
+* Implement the GetLatePacketCounters method but return an empty collection
+* Implement the ResetPacketCounters method and allow it to be invoked successfully even though it will not have an affect on any packet counters
+* Implement the autoResetPacketCounters property and allow it to be changed even though it will not have an affect on the behavior of the device since no packet counters are ever reported
+
 ### Receiver synchronization
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the synchronization domain:
+[NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) includes the following specific items covering the synchronization domain:
 
 * Properties
   * externalSynchronizationStatus
@@ -169,18 +176,16 @@ This includes the following specific items which cover the synchronization domai
 
 The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its time synchronization mechanisms.
 
-Devices MUST specify:
+Devices MUST report the externalSynchronizationStatus as follows:
 
-* Not used - when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
+* NotUsed - when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
 * Healthy - when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
-* Partially healthy - when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
+* PartiallyHealthy - when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
 * Unhealthy - when the receiver is expected to use external synchronization but is not locked to any external synchronization source
 
-The externalSynchronizationStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The externalSynchronizationStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
-Devices are recommended to publish information about the previous synchronization source and interface retrieved from as well as the current synchronization source and interface retrieved from in the externalSynchronizationStatusMessage.
-
-Devices are RECOMMENDED to publish in the `externalSynchronizationStatusMessage` property information about the previous synchronization source and originating interface as well as the current synchronization source and its originating interface.
+Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage property information about the previous synchronization source and originating interface as well as the current synchronization source and its originating interface.
 
 Example:
 
@@ -196,9 +201,9 @@ previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:
 
 #### Synchronization source change
 
-When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
+When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
-When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the configured `statusReportingDelay` property).
+When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
 
 Devices MUST report any synchronization source change as an increment to the `synchronizationSourceChanges` counter property.
 
@@ -207,10 +212,15 @@ Devices MUST be able to reset the `synchronizationSourceChanges` counter propert
 * When a receiver activation occurs
 * When a client invokes the `ResetSynchronizationSourceChanges` method
 
+Devices MUST be compliant with the monitoring model even when they do not use external synchronization. In such cases they MUST:
+
+* Implement the synchronizationSourceId property and set its value to `internal`
+* Implement the synchronizationSourceChanges property and set its value to 0
+* Implement the ResetSynchronizationSourceChanges method and allow it to be invoked successfully even though it will not have an affect on the synchronizationSourceChanges property
+
 ### Receiver stream validation
 
-The technical model describing the monitoring requirements for a receiver is [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor).  
-This includes the following specific items which cover the stream validation domain:
+[NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) includes the following specific items covering the stream validation domain:
 
 * Properties
   * streamStatus
@@ -224,14 +234,14 @@ This includes the following specific items which cover the stream validation dom
 
 The streamStatus property allows devices to expose the health of the receiver with regards to the validity of the stream being received.
 
-Devices specify:
+Devices MUST report the streamStatus as follows:
 
-* When the receiver is Inactive (is a neutral state)
+* Inactive when the receiver is Inactive (this is a neutral state)
 * Healthy when the receiver is Active and can decode the incoming stream without any errors
 * PartiallyHealthy when the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting
 * Unhealthy when the receiver is active and cannot decode the incoming stream
 
-The streamStatusMessage is a nullable property where devices can offer the reason and further details as to why the current status value was chosen.
+The streamStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
 Examples:
 
