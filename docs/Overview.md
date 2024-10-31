@@ -214,7 +214,7 @@ Devices MUST be able to reset the `synchronizationSourceChanges` counter propert
 
 Devices MUST be compliant with the monitoring model even when they do not use external synchronization. In such cases they MUST:
 
-* Implement the synchronizationSourceId property and set its value to null
+* Implement the synchronizationSourceId property and set its value to `internal`
 * Implement the synchronizationSourceChanges property and set its value to 0
 * Implement the ResetSynchronizationSourceChanges method and allow it to be invoked successfully even though it will not have an affect on the synchronizationSourceChanges property
 
