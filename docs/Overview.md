@@ -126,7 +126,7 @@ The connectionStatus property allows devices to expose the health of the receive
 
 Devices MUST report the connectionStatus as follows:
 
-* Inactive when the receiver has not been activated (this is a neutral state)
+* Inactive when the receiver is Inactive (this is a neutral state)
 * Healthy when the receiver is Active and receiving all required packets without using any form of loss recovery
 * PartiallyHealthy when the receiver is Active and is receiving all required packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)
 * Unhealthy when the receiver is Active and is either not receiving any packets or receiving packets but has unrecoverable errors (such as late or lost packets)
@@ -236,7 +236,7 @@ The streamStatus property allows devices to expose the health of the receiver wi
 
 Devices MUST report the streamStatus as follows:
 
-* Inactive when the receiver has not been activated (this is a neutral state)
+* Inactive when the receiver is Inactive (this is a neutral state)
 * Healthy when the receiver is Active and can decode the incoming stream without any errors
 * PartiallyHealthy when the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting
 * Unhealthy when the receiver is active and cannot decode the incoming stream
