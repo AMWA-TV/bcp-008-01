@@ -149,7 +149,7 @@ The `autoResetPacketCounters` property allows clients to configure if the packet
 
 For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
-Devices MUST be compliant with the monitoring model even when they do not have the capability to detect lost or late packets. In such cases they MUST:
+When devices do not have the capability to detect lost or late packets they MUST:
 
 * Implement the GetLostPacketCounters method but return an empty collection
 * Implement the GetLatePacketCounters method but return an empty collection
@@ -178,10 +178,10 @@ The externalSynchronizationStatus property allows devices to expose the health o
 
 Devices MUST report the externalSynchronizationStatus as follows:
 
-* NotUsed - when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
-* Healthy - when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
-* PartiallyHealthy - when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
-* Unhealthy - when the receiver is expected to use external synchronization but is not locked to any external synchronization source
+* NotUsed when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
+* Healthy when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
+* PartiallyHealthy when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
+* Unhealthy when the receiver is expected to use external synchronization but is not locked to any external synchronization source
 
 The externalSynchronizationStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
@@ -212,7 +212,7 @@ Devices MUST be able to reset the `synchronizationSourceChanges` counter propert
 * When a receiver activation occurs
 * When a client invokes the `ResetSynchronizationSourceChanges` method
 
-Devices MUST be compliant with the monitoring model even when they do not use external synchronization. In such cases they MUST:
+When devices do not use external synchronization they MUST:
 
 * Implement the synchronizationSourceId property and set its value to `internal`
 * Implement the synchronizationSourceChanges property and set its value to 0
