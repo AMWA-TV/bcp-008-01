@@ -287,3 +287,13 @@ Touchpoints example:
   }
 ]
 ```
+
+### NcWorker inheritance
+
+[NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor) inherits from the [NcWorker](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker) model.
+
+Since [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) inherits from the [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor) model then it also indirectly inherits from the [NcWorker](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker) model.
+
+Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST always have the `enabled` property set to `true`.
+
+Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST NOT allow changes to the `enabled` property and instead MUST return `InvalidRequest` to Set method invocations.
