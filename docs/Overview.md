@@ -266,3 +266,24 @@ When a receiver is being deactivated it MUST cleanly disconnect from the current
 * overallStatus
 * connectionStatus
 * streamStatus
+
+### Touchpoints and IS-04 receivers
+
+Receiver monitors make use of the [Touchpoints](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#touchpoints) mechanism inherited from [NcObject](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html) to attach to the correct receiver identity.
+
+Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST populate the `touchpoints` property with a non empty collection containing a single entry of type [NcTouchpointNmos](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointnmos) which contains a resource of type [NcTouchpointResourceNmos](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointresourcenmos) where the `id` field is set to the associated IS-04 receiver UUID.
+
+Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST maintain a 1 to 1 relationship between its role and the receiver resource it monitors (expressed via the touchpoints property) as long as the IS-04 receiver resource hasn’t been disposed by the device.
+
+Touchpoints example:
+
+```json
+[
+  {
+    "contextNamespace": "x-nmos",
+    "resource": {
+      "id": "82fdc03f-76c7-4989-9d05-3ea2cc98875e"
+    }
+  }
+]
+```
