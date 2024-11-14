@@ -55,7 +55,7 @@ The technical model describing the monitoring requirements for a receiver is [Nc
 
 This model inherits from the baseline status monitoring model [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor).
 
-For implementations to be in conformance with the BCP they MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) directly or as a [vendor specific variant derived from NcReceiverMonitor](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which can add more statuses, properties and methods.
+Receiver monitors MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) directly or derive a [vendor specific variant from NcReceiverMonitor](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html) which MAY add more statuses, properties and methods but MUST still comply with the requirements set out in this specification.
 
 | ![Receiver monitoring model](images/receiver-model-minimal.png) |
 |:--:|
@@ -271,9 +271,9 @@ When a receiver is being deactivated it MUST cleanly disconnect from the current
 
 Receiver monitors make use of the [Touchpoints](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#touchpoints) mechanism inherited from [NcObject](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html) to attach to the correct receiver identity.
 
-Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST populate the `touchpoints` property with a non empty collection containing a single entry of type [NcTouchpointNmos](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointnmos) which contains a resource of type [NcTouchpointResourceNmos](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointresourcenmos) where the `id` field is set to the associated IS-04 receiver UUID.
+The `touchpoints` property of any [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST have one or more touchpoints of which one and only one entry MUST be of type [NcTouchpointNmos](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointnmos) where the `resourceType` field MUST be set to "receiver" and the `id` field MUST be set to the associated IS-04 receiver UUID.
 
-Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST maintain a 1 to 1 relationship between its role and the receiver resource it monitors (expressed via the touchpoints property) as long as the IS-04 receiver resource hasn’t been disposed by the device.
+Receiver monitors MUST maintain a 1 to 1 relationship between its role and the receiver resource it monitors (expressed via the `touchpoints` property) for the lifetime of the IS-04 receiver resource.
 
 Touchpoints example:
 
@@ -282,6 +282,7 @@ Touchpoints example:
   {
     "contextNamespace": "x-nmos",
     "resource": {
+      "resourceType": "receiver",
       "id": "82fdc03f-76c7-4989-9d05-3ea2cc98875e"
     }
   }
@@ -294,6 +295,6 @@ Touchpoints example:
 
 Since [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) inherits from the [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncstatusmonitor) model then it also indirectly inherits from the [NcWorker](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker) model.
 
-Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST always have the `enabled` property set to `true`.
+Receiver monitors MUST always have the `enabled` property set to `true`.
 
-Any implementation of [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) MUST NOT allow changes to the `enabled` property and instead MUST return `InvalidRequest` to Set method invocations.
+Receiver monitors MUST NOT allow changes to the `enabled` property and instead MUST return `InvalidRequest` to Set method invocations for this property.
