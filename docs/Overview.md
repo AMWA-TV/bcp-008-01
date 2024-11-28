@@ -46,7 +46,7 @@ Receiver activation - An [IS-05 activation](https://specs.amwa.tv/is-05/latest/d
 
 Devices in conformance to this BCP MUST comply with [NMOS Control Framework](https://specs.amwa.tv/ms-05-02/) for generating device models.  
 Devices in conformance to this BCP MUST comply with [NMOS Control Protocol](https://specs.amwa.tv/is-12/) to expose device models via a standard API with full support for notifications.  
-Devices in conformance to this BCP MUST comply with [NMOS Discovery and Registration](https://specs.amwa.tv/is-04/) to create and register Nodes, Devices and Receiver resources.  
+Devices in conformance to this BCP MUST comply with [NMOS Discovery and Registration](https://specs.amwa.tv/is-04/) to create, describe and register Nodes, Devices and Receiver resources.  
 Devices in conformance to this BCP MUST comply with [NMOS Device Connection Management](https://specs.amwa.tv/is-05/) to perform connection management actions against Receiver resources.  
 
 ## Receiver monitoring
@@ -63,11 +63,11 @@ Receiver monitors MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-
 
 ### Receiver status reporting delay
 
-The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
+The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices are RECOMMENDED to use 3s as the default value when the receiver monitor object is first constructed and MUST allow it to be changed to values within the device's published constraints. Devices MUST allow setting the `statusReportingDelay` property to a value of 3s. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
 
 * A receiver is expected to go through a period of instability upon activation. Therefore, on Receiver activation domain specific statuses offering an `Inactive` option MUST transition immediately to the Healthy state. Furthermore, after activation they MUST delay the reporting of non Healthy states for the duration specified by `statusReportingDelay`, as long as the Receiver isn't being [deactivated](#deactivating-a-receiver), and then transition to any other appropriate state.
 
-* Once any Receiver activation `statusReportingDelay` has elapsed and the Receiver isn't being [deactivated](#deactivating-a-receiver), all domain specific statuses MUST delay the transition to a more healthy state by the configured `statusReportingDelay` value and MUST only make the transition if the healthier state is maintained for the duration. All domain specific statuses MUST make a transition to a less healthy state as soon as possible.
+* Once any Receiver activation `statusReportingDelay` has elapsed and the Receiver isn't being [deactivated](#deactivating-a-receiver), all domain specific statuses MUST delay the transition to a more healthy state by the configured `statusReportingDelay` value and MUST only make the transition if the healthier state is maintained for the duration. All domain specific statuses MUST make a transition to a less healthy state without delay.
 
 ### Receiver overall status
 
