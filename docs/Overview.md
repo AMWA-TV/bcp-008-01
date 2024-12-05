@@ -178,7 +178,7 @@ The externalSynchronizationStatus property allows devices to expose the health o
 
 Devices MUST report the externalSynchronizationStatus as follows:
 
-* NotUsed when the receiver is not using external synchronization or when the device is itself the synchronization source (this is a neutral state)
+* NotUsed when the receiver is not intending to use external synchronization or when the device is itself the synchronization source (this is a neutral state)
 * Healthy when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)
 * PartiallyHealthy when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)
 * Unhealthy when the receiver is expected to use external synchronization but is not locked to any external synchronization source
@@ -201,7 +201,7 @@ previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:
 
 #### Synchronization source change
 
-When devices are configured to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not using external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
+When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
 When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
 
