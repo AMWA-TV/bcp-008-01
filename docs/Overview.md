@@ -145,7 +145,7 @@ Devices with capabilities to detect late or lost packets MUST implement the foll
 * GetLatePacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
 * ResetPacketCounters - resets both the Lost and Late packet counters to 0.
 
-The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation.
+The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices are RECOMMENDED to have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation. Devices MUST allow setting the `autoResetPacketCounters` property to a value of `true` and MAY allow setting the property to `false`.
 
 For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
