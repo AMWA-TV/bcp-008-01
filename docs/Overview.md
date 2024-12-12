@@ -69,6 +69,10 @@ The `statusReportingDelay` property allows clients to customize the reporting de
 
 * Once any Receiver activation `statusReportingDelay` has elapsed and the Receiver isn't being [deactivated](#deactivating-a-receiver), all domain specific statuses MUST delay the transition to a more healthy state by the configured `statusReportingDelay` value and MUST only make the transition if the healthier state is maintained for the duration. All domain specific statuses MUST make a transition to a less healthy state without delay.
 
+| ![Status reporting delay](images/status-reporting-delay.png) |
+|:--:|
+| _**Status reporting delay example**_ |
+
 ### Receiver overall status
 
 The purpose of the overallStatus is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client.
@@ -80,6 +84,10 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 * When the Receiver is Inactive the overallStatus uses the Inactive option
 * When the Receiver is Active the overallStatus takes the worst state across the different domains (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overallStatus would be Unhealthy)
 * The overallStatus is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used)
+
+| ![Overall status mapping examples](images/overall-status.png) |
+|:--:|
+| _**Overall status mapping examples**_ |
 
 ### Receiver connectivity
 
@@ -266,6 +274,10 @@ When a receiver is being deactivated it MUST cleanly disconnect from the current
 * overallStatus
 * connectionStatus
 * streamStatus
+
+| ![Deactivation transition example](images/deactivation.png) |
+|:--:|
+| _**Deactivation transition example**_ |
 
 ### Touchpoints and IS-04 receivers
 
