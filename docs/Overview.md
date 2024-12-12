@@ -71,7 +71,7 @@ The `statusReportingDelay` property allows clients to customize the reporting de
 
 | ![Status reporting delay](images/status-reporting-delay.png) |
 |:--:|
-| _**Status reporting delay**_ |
+| _**Status reporting delay example**_ |
 
 ### Receiver overall status
 
