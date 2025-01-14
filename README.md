@@ -22,6 +22,19 @@ This repository holds the source for this Specification, part of the family of [
 - It lists the prerequisites and dependencies in terms of NMOS specifications
 - It describes the status monitoring domains along with expectations, behaviour and conformance requirements
 
+### Where to start?
+
+This specification relies on previous familiarity with the following existing specifications:
+
+- [MS-05-02: NMOS Control Framework](https://specs.amwa.tv/ms-05-02/)
+- [IS-12: NMOS Control Protocol](https://specs.amwa.tv/is-12/)
+- [IS-04: NMOS Discovery and Registration](https://specs.amwa.tv/is-04/)
+- [IS-05: NMOS Device Connection Management](https://specs.amwa.tv/is-05/)
+
+An implementation guide is available for [NMOS Control](https://specs.amwa.tv/info-006/).  
+An example application is available in the form of the [NMOS Device Control Mock Application](https://github.com/AMWA-TV/nmos-device-control-mock).  
+A testing tool is available in the form of the [NMOS API Testing Tool](https://github.com/AMWA-TV/nmos-testing).
+
 <!-- INTRO-END -->
 
 ## Getting started
