@@ -83,7 +83,7 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 
 * When the Receiver is Inactive the overallStatus uses the Inactive option
 * When the Receiver is Active the overallStatus takes the least healthy state of all domain statuses (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overallStatus would be Unhealthy)
-* The overallStatus is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used)
+* The overallStatus is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used, Inactive)
 
 | ![Overall status mapping examples](images/overall-status.png) |
 |:--:|
@@ -182,7 +182,7 @@ When devices do not have the capability to detect lost or late packets they MUST
 
 #### External synchronization status
 
-The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its time synchronization mechanisms.
+The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its synchronization mechanisms.
 
 Devices MUST report the externalSynchronizationStatus as follows:
 
