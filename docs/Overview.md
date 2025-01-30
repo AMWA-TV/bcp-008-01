@@ -63,7 +63,7 @@ Receiver monitors MUST implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-
 
 ### Receiver status reporting delay
 
-The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices are RECOMMENDED to use 3s as the default value when the receiver monitor object is first constructed and MUST allow it to be changed to values within the device's published constraints. Devices MUST allow setting the `statusReportingDelay` property to a value of 3s. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
+The `statusReportingDelay` property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value when the receiver monitor object is first constructed and MUST allow it to be changed to values within the device's published constraints. Devices MUST allow setting the `statusReportingDelay` property to a value of 3s. All domain specific statuses are impacted by the configured `statusReportingDelay` as follows:
 
 * A receiver is expected to go through a period of instability upon activation. Therefore, on Receiver activation domain specific statuses offering an `Inactive` option MUST transition immediately to the Healthy state. Furthermore, after activation, as long as the Receiver isn’t being [deactivated](#deactivating-a-receiver), it MUST delay the reporting of non Healthy states for the duration specified by `statusReportingDelay`, and then transition to any other appropriate state.
 
@@ -145,7 +145,7 @@ The connectionStatusMessage is a nullable property where devices MAY offer the r
 
 The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when [link status](#link-status) or [connection status](#connection-status) indicate problems (are PartiallyHealthy or Unhealthy).
 
-Lost packets are packets that never arrived. Late packets are packets that arrived but arrived too late to be usable by the essence reconstruction process without increasing the link offset delay.
+Lost packets are packets that never arrived. Late packets are packets that arrived but arrived too late to be usable by presentation time.
 
 Devices with capabilities to detect late or lost packets MUST implement the following methods:
 
@@ -153,7 +153,7 @@ Devices with capabilities to detect late or lost packets MUST implement the foll
 * GetLatePacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
 * ResetPacketCounters - resets both the Lost and Late packet counters to 0.
 
-The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices are RECOMMENDED to have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation. Devices MUST allow setting the `autoResetPacketCounters` property to a value of `true` and MAY allow setting the property to `false`.
+The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation. Devices MUST allow setting the `autoResetPacketCounters` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to clear counters when making a connection.
 
 For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
