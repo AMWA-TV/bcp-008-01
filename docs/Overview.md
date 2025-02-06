@@ -220,6 +220,8 @@ Devices MUST be able to reset the `synchronizationSourceChanges` counter propert
 * When a receiver activation occurs
 * When a client invokes the `ResetSynchronizationSourceChanges` method
 
+The `autoResetSynchronizationSourceChanges` property allows clients to configure if synchronization source changes automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset the property to 0 after each activation. Devices MUST allow setting the `autoResetSynchronizationSourceChanges` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to reset automatically after each activation.
+
 When devices do not use external synchronization they MUST:
 
 * Implement the synchronizationSourceId property and set its value to `internal`
