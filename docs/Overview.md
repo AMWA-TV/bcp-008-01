@@ -73,6 +73,26 @@ The `statusReportingDelay` property allows clients to customize the reporting de
 |:--:|
 | _**Status reporting delay example**_ |
 
+### Receiver status transition counters
+
+All receiver specific domain statuses have an associated status transition counter property. These increment each time the associated status transitions to a worse state. Transitions to/from neutral states like `Inactive` or `NotUsed` are ignored.
+
+The intention is that these properties store historical negative trend transitions for each status.
+
+The list of all status transition counter properties is:
+
+* linkStatusTransitionCounter
+* connectionStatusTransitionCounter
+* externalSynchronizationStatusTransitionCounter
+* streamStatusTransitionCounter
+
+Devices MUST be able to reset ALL status transition counter properties in the following two ways:
+
+* When a receiver activation occurs
+* When a client invokes the `ResetStatusTransitionCounters` method
+
+The `autoResetStatusTransitionCounters` property allows clients to configure if ALL status transition counter properties automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset ALL status transition counter properties to 0 after each activation. Devices MUST allow setting the `autoResetStatusTransitionCounters` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to reset automatically after each activation.
+
 ### Receiver overall status
 
 The purpose of the overallStatus is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client.
@@ -96,8 +116,10 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
 * Properties
   * linkStatus
   * linkStatusMessage
+  * linkStatusTransitionCounter
   * connectionStatus
   * connectionStatusMessage
+  * connectionStatusTransitionCounter
   * autoResetPacketCounters
 * Methods
   * GetLostPackets
@@ -171,6 +193,7 @@ When devices do not have the capability to detect lost or late packets they MUST
 * Properties
   * externalSynchronizationStatus
   * externalSynchronizationStatusMessage
+  * externalSynchronizationStatusTransitionCounter
   * synchronizationSourceId
   * synchronizationSourceChanges
 * Methods
@@ -235,6 +258,7 @@ When devices do not use external synchronization they MUST:
 * Properties
   * streamStatus
   * streamStatusMessage
+  * streamStatusTransitionCounter
 
 | ![Receiver stream validation](images/receiver-model-stream-validation.png) |
 |:--:|
