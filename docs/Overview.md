@@ -88,10 +88,10 @@ The list of all status transition counter properties is:
 
 Devices MUST be able to reset ALL status transition counter properties in the following two ways:
 
-* When a receiver activation occurs
-* When a client invokes the `ResetStatusTransitionCounters` method
+* When a receiver activation occurs if `autoResetCounters` is set to `true`
+* When a client invokes the `ResetCounters` method
 
-The `autoResetStatusTransitionCounters` property allows clients to configure if ALL status transition counter properties automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset ALL status transition counter properties to 0 after each activation. Devices MUST allow setting the `autoResetStatusTransitionCounters` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to reset automatically after each activation.
+The `autoResetCounters` property allows clients to configure if ALL counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset ALL counters to 0 after each activation. Devices MUST allow setting the `autoResetCounters` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to reset automatically after each activation.
 
 ### Receiver overall status
 
@@ -120,11 +120,9 @@ Devices MUST follow the rules listed below when mapping specific domain statuses
   * connectionStatus
   * connectionStatusMessage
   * connectionStatusTransitionCounter
-  * autoResetPacketCounters
 * Methods
   * GetLostPackets
   * GetLatePackets
-  * ResetPacketCounters
 
 | ![Receiver connectivity](images/receiver-model-connectivity.png) |
 |:--:|
@@ -173,9 +171,11 @@ Devices with capabilities to detect late or lost packets MUST implement the foll
 
 * GetLostPacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).
 * GetLatePacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).
-* ResetPacketCounters - resets both the Lost and Late packet counters to 0.
 
-The `autoResetPacketCounters` property allows clients to configure if the packet counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset all packet counters to 0 after each activation. Devices MUST allow setting the `autoResetPacketCounters` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to clear counters when making a connection.
+Devices with capabilities to detect late or lost packets MUST be able to reset ALL lost and late packet counters in the following two ways:
+
+* When a receiver activation occurs if `autoResetCounters` is set to `true`
+* When a client invokes the `ResetCounters` method
 
 For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.
 
@@ -183,8 +183,6 @@ When devices do not have the capability to detect lost or late packets they MUST
 
 * Implement the GetLostPacketCounters method but return an empty collection
 * Implement the GetLatePacketCounters method but return an empty collection
-* Implement the ResetPacketCounters method and allow it to be invoked successfully even though it will not have an affect on any packet counters
-* Implement the autoResetPacketCounters property and allow it to be changed even though it will not have an affect on the behavior of the device since no packet counters are ever reported
 
 ### Receiver synchronization
 
@@ -195,9 +193,6 @@ When devices do not have the capability to detect lost or late packets they MUST
   * externalSynchronizationStatusMessage
   * externalSynchronizationStatusTransitionCounter
   * synchronizationSourceId
-  * synchronizationSourceChanges
-* Methods
-  * ResetSynchronizationSourceChanges
 
 | ![Receiver synchronization](images/receiver-model-synchronization.png) |
 |:--:|
@@ -236,20 +231,7 @@ When devices intend to use external synchronization they MUST publish the synchr
 
 When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
 
-Devices MUST report any synchronization source change as an increment to the `synchronizationSourceChanges` counter property.
-
-Devices MUST be able to reset the `synchronizationSourceChanges` counter property in the following two ways:
-
-* When a receiver activation occurs
-* When a client invokes the `ResetSynchronizationSourceChanges` method
-
-The `autoResetSynchronizationSourceChanges` property allows clients to configure if synchronization source changes automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset the property to 0 after each activation. Devices MUST allow setting the `autoResetSynchronizationSourceChanges` property to a value of `true` and MAY allow setting the property to `false`. This supports use cases where users do not want to reset automatically after each activation.
-
-When devices do not use external synchronization they MUST:
-
-* Implement the synchronizationSourceId property and set its value to `internal`
-* Implement the synchronizationSourceChanges property and set its value to 0
-* Implement the ResetSynchronizationSourceChanges method and allow it to be invoked successfully even though it will not have an affect on the synchronizationSourceChanges property
+When devices do not use external synchronization they MUST implement the synchronizationSourceId property and set its value to `internal`.
 
 ### Receiver stream validation
 
