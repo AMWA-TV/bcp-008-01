@@ -370,3 +370,5 @@ Controllers MAY be capable to set the autoResetCounters property using the [Set 
 Controllers MAY be capable of getting the current value of ANY status transition counter property using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate it to the User.
 
 Controllers MAY be capable of tracking changes to ANY status transition counter property by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these to the User.
+
+Controllers MAY provide a single indicator to inform the User whenever ANY of the domains have a non zero status transition counter. This single indicator complements the overallStatus by capturing situations where ANY of the domains have experienced issues since their last reset.
