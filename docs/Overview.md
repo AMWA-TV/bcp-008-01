@@ -75,7 +75,7 @@ The `statusReportingDelay` property allows clients to customize the reporting de
 
 ### Receiver status transition counters
 
-All receiver specific domain statuses have an associated status transition counter property. These increment each time the associated status transitions to a less healthy state. Transitions to/from neutral states like `Inactive` or `NotUsed` are ignored.
+All receiver specific domain statuses have an associated status transition counter property. These MUST increment each time the associated status transitions to a less healthy state. Transitions to/from neutral states like `Inactive` or `NotUsed` are ignored.
 
 The intention is that these properties store historical negative trend transitions for each status.
 
@@ -227,11 +227,9 @@ previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:
 
 #### Synchronization source change
 
-When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, using `null` if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
+When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, setting the `synchronizationSourceId` to `null` if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
-When devices suffer a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
-
-When devices do not use external synchronization they MUST implement the synchronizationSourceId property and set its value to `internal`.
+When devices observe a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
 
 ### Receiver stream validation
 
@@ -318,3 +316,59 @@ Since [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branch
 Receiver monitors MUST always have the `enabled` property set to `true`.
 
 Receiver monitors MUST NOT allow changes to the `enabled` property and instead MUST return `InvalidRequest` to Set method invocations for this property.
+
+## Controller
+
+Controllers MUST be capable to discover receiver monitor objects (objects which implement [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/publish-status-reporting/monitoring/#ncreceivermonitor) directly or derive a [vendor specific variant from NcReceiverMonitor](https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html)) inside a device model and indicate them to the User. All blocks inside an MS-05-02 device allow [searching for members by their class id](https://specs.amwa.tv/ms-05-02/latest/docs/Blocks.html#search-methods).
+
+Controllers MUST be capable to find the associated IS-04 receiver identity for each receiver monitor by using the [touchpoints](#touchpoints-and-is-04-receivers) and indicate this relationship to the User.
+
+Controllers MUST be capable to get the current state of the overallStatus property using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate this to the User.
+
+Controllers MUST be capable of tracking changes to the overallStatus property by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these changes to the User.
+
+Controllers MUST be capable to get the current state of the following status properties using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate them to the User:
+
+* linkStatus
+* connectionStatus
+* externalSynchronizationStatus
+* streamStatus
+
+Controllers MUST be capable of tracking changes to the following status properties by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these changes to the User:
+
+* linkStatus
+* connectionStatus
+* externalSynchronizationStatus
+* streamStatus
+
+Controllers MUST be capable of getting the current value of ALL status message properties using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate it to the User.
+
+Controllers MUST be capable of tracking changes to ALL the status message properties by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these to the User.
+
+Controllers MUST be capable of getting the current value of the synchronizationSourceId using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate it to the User.
+
+Controllers MUST be capable of tracking changes to the synchronizationSourceId property by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these to the User.
+
+The values of status message properties MUST NOT be interpreted by controllers and are meant to be used verbatim and indicated to the User.
+
+Controllers SHOULD NOT open an excessive number of WebSocket connections against the same control endpoint.
+
+Controllers MUST always use subscriptions and notifications to keep track of changes to any properties of interest and not revert to a polling behaviour.
+
+Controllers MAY be capable of getting the lost packet counters from a device which offers them by invoking the GetLostPacketCounters method using [IS-12 commands](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type) and indicating their value to the User.
+
+Controllers MAY be capable of getting the late packet counters from a device which offers them by invoking the GetLatePacketCounters method using [IS-12 commands](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type) and indicating their value to the User.
+
+Controllers SHOULD NOT resort to a fast pace repetitive polling workflow for getting the lost packets of a device which offers them.
+
+Controllers SHOULD NOT resort to a fast pace repetitive polling workflow for getting the late packets of a device which offers them.
+
+Controllers MAY be capable to invoke the ResetCounters method by using [IS-12 commands](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type).
+
+Controllers MAY be capable to set the autoResetCounters property using the [Set method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter).
+
+Controllers MAY be capable of getting the current value of ANY status transition counter property using the [Get method](https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter) and indicate it to the User.
+
+Controllers MAY be capable of tracking changes to ANY status transition counter property by using [subscriptions and notifications](https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type) and reflect these to the User.
+
+Controllers MAY provide a single indicator to inform the User whenever ANY of the domains have a non zero status transition counter. This single indicator complements the overallStatus by capturing situations where ANY of the domains have experienced issues since their last reset.
