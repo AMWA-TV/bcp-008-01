@@ -251,7 +251,7 @@ The streamStatus property allows devices to expose the health of the receiver wi
 Devices MUST report the streamStatus as follows:
 
 * Inactive when the receiver is Inactive (this is a neutral state)
-* Healthy when the receiver is Active and can decode the incoming stream without any errors
+* Healthy when the receiver is Active and can decode the incoming stream without any detected errors
 * PartiallyHealthy when the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting
 * Unhealthy when the receiver is active and cannot decode the incoming stream
 
