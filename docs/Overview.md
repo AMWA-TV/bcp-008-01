@@ -321,9 +321,9 @@ Touchpoints example:
 
 Since [NcReceiverMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor) inherits from the [NcStatusMonitor](https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncstatusmonitor) model then it also indirectly inherits from the [NcWorker](https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker) model.
 
-Receiver monitors MUST always have the `enabled` property set to `true`.
+In the case of Receiver monitors, the `enabled` property has no operational meaning and MUST NOT be interpreted in any way.
 
-Receiver monitors MUST NOT allow changes to the `enabled` property and instead MUST return `InvalidRequest` to Set method invocations for this property.
+Devices MAY choose to not allow changes to the `enabled` property and instead return `InvalidRequest` to Set method invocations for this property.
 
 ## Controller
 
