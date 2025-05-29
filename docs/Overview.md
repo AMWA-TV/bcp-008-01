@@ -107,6 +107,14 @@ For example, a number of domain statuses become less healthy when a network inte
 NIC 1 is down
 ```
 
+Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
+
+For example, upon recovery to a healthy state the overallStatusMessage could hold the following value
+
+```log
+Previously: NIC 1 is down
+```
+
 Devices MUST follow the rules listed below when mapping specific domain statuses in the combined overallStatus:
 
 * When the Receiver is Inactive the overallStatus uses the Inactive option
@@ -156,6 +164,14 @@ Example:
 NIC1, NIC2 are down
 ```
 
+Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
+
+For example, upon recovery to a healthy state the linkStatusMessage could hold the following value
+
+```log
+Previously: NIC1, NIC2 are down
+```
+
 #### Connection status
 
 The connectionStatus property allows devices to expose the health of the receiver with regards to receiving stream packets successfully. Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connectionStatus.
@@ -168,6 +184,14 @@ Devices MUST report the connectionStatus as follows:
 * Unhealthy when the receiver is Active and is either not receiving any packets or receiving packets but has unrecoverable errors (such as late or lost packets)
 
 The connectionStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
+
+Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
+
+For example, upon recovery to a healthy state the connectionStatusMessage could hold the following value
+
+```log
+Previously: Packet loss detected
+```
 
 #### Late and lost packets
 
@@ -224,13 +248,21 @@ Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage p
 Example:
 
 ```log
-previousSync:baseband from SDI1, currentSync: 0x00:0c:ec:ff:fe:0a:2b:a1 from NIC1
+Sync source change, from:baseband on SDI1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC1
 ```
 
 or
 
 ```log
-previousSync:0x70:35:09:ff:fe:c7:da:00 from NIC1, currentSync: 0x00:0c:ec:ff:fe:0a:2b:a1 from NIC2
+Sync source change, from:0x70:35:09:ff:fe:c7:da:00 on NIC1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC2
+```
+
+Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
+
+For example, upon recovery to a healthy state the externalSynchronizationStatusMessage could hold the following value
+
+```log
+Previously: Sync source change, from:baseband on SDI1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC1
 ```
 
 #### Synchronization source change
@@ -277,6 +309,14 @@ Payload ID in RTP stream does not match SDP file
 
 ```log
 Parameter X does not match expectations
+```
+
+Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
+
+For example, upon recovery to a healthy state the streamStatusMessage could hold the following value
+
+```log
+Previously: Payload ID in RTP stream does not match SDP file
 ```
 
 ### Deactivating a receiver
