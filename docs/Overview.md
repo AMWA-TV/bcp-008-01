@@ -99,7 +99,7 @@ The purpose of the overallStatus is to abstract and combine the specific domain 
 
 `Note`: The overallStatus might remain the same even when specific domain statuses change. However, the overallStatusMessage might change to indicate that a different combination of internal states is causing the current overallStatus value.
 
-Where possible, Device implementations are RECOMMENDED to populate the overallStatusMessage with the root causes which led to the current overallStatus.
+Where possible, Device implementations are RECOMMENDED to populate the overallStatusMessage with the root causes which led to the current PartiallyHealthy or Unhealthy overallStatus.
 
 For example, a number of domain statuses become less healthy when a network interface is down. In this case the overallStatusMessage could report the following root cause
 
