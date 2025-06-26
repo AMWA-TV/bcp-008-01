@@ -289,7 +289,7 @@ Previously: Source changed from: SDI1
 
 When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, setting the `synchronizationSourceId` to `null` if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
-Where possible devices are RECOMMENDED to also publish the interface name used in the synchronization source id like in the following examples.
+Where possible devices are RECOMMENDED to also indicate the interface used in the synchronization source id like in the following examples.
 
 ```log
 00:0c:ec:ff:fe:0a:2b:a1 on NIC1
