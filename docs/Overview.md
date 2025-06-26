@@ -316,10 +316,10 @@ BlackBurst 1
 or
 
 ```log
-WCLK BNC4
+WCLK BNC1
 ```
 
-When devices observe a synchronization source id change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyHealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)). Devices capable of reporting the specific interface name used in the synchronization source id MUST follow the previous transition requirement even when the only change observed is the interface name now being used for synchronization.
+When devices observe a synchronization source id change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyHealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)). Devices capable of reporting the specific interface used in the synchronization source id MUST follow the previous transition requirement even when the only change observed is the interface now being used for synchronization.
 
 ### Receiver stream validation
 
