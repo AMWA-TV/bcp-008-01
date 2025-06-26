@@ -263,18 +263,18 @@ Devices MUST report the externalSynchronizationStatus as follows:
 
 The externalSynchronizationStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.
 
-Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage property information about the previous synchronization source and originating interface as well as the current synchronization source and its originating interface.
+Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage property information about the previous synchronization source and originating interface.
 
 Example:
 
 ```log
-Sync source change, from:baseband on SDI1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+Source change from: SDI1
 ```
 
 or
 
 ```log
-Sync source change, from:0x70:35:09:ff:fe:c7:da:00 on NIC1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC2
+Source change from: 00:0c:ec:ff:fe:0a:2b:a1 on NIC1
 ```
 
 Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
@@ -282,14 +282,44 @@ Furthermore, where possible Device implementations are RECOMMENDED to retain the
 For example, upon recovery to a healthy state the externalSynchronizationStatusMessage could hold the following value
 
 ```log
-Previously: Sync source change, from:baseband on SDI1, to: 0x00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+Previously: Source change from: SDI1
 ```
 
 #### Synchronization source change
 
 When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the `synchronizationSourceId` property and update the `externalSynchronizationStatus` property whenever it changes, setting the `synchronizationSourceId` to `null` if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with `internal` or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).
 
-When devices observe a synchronization source change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyUnhealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)).
+Where possible devices are RECOMMENDED to also indicate the interface used in the synchronization source id like in the following examples.
+
+```log
+00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+```
+
+or
+
+```log
+00:1d:ec:ff:fe:0a:2b:b4, Blue
+```
+
+or
+
+```log
+SDI1
+```
+
+or
+
+```log
+BlackBurst 1
+```
+
+or
+
+```log
+WCLK BNC1
+```
+
+When devices observe a synchronization source id change the `externalSynchronizationStatus` property MUST temporarily transition to a `PartiallyHealthy` state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the [status reporting delay section](#receiver-status-reporting-delay)). Devices capable of reporting the specific interface used in the synchronization source id MUST follow the previous transition requirement even when the only change observed is the interface now being used for synchronization.
 
 ### Receiver stream validation
 
