@@ -268,13 +268,13 @@ Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage p
 Example:
 
 ```log
-Source changed from: SDI1
+Source change from: SDI1
 ```
 
 or
 
 ```log
-Source changed from: 00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+Source change from: 00:0c:ec:ff:fe:0a:2b:a1 on NIC1
 ```
 
 Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".
@@ -282,7 +282,7 @@ Furthermore, where possible Device implementations are RECOMMENDED to retain the
 For example, upon recovery to a healthy state the externalSynchronizationStatusMessage could hold the following value
 
 ```log
-Previously: Source changed from: SDI1
+Previously: Source change from: SDI1
 ```
 
 #### Synchronization source change
