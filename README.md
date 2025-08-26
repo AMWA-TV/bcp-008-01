@@ -1,4 +1,4 @@
-# \[Work In Progress\] AMWA BCP-008-01: Receiver status monitoring
+# AMWA BCP-008-01: NMOS Receiver Status Monitoring
 
 [![Lint Status](https://github.com/AMWA-TV/bcp-008-01/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-008-01/actions?query=workflow%3ALint)
 [![Render Status](https://github.com/AMWA-TV/bcp-008-01/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-008-01/actions?query=workflow%3ARender)
