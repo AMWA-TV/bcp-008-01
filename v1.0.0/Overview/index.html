@@ -1,0 +1,1502 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://specs.amwa.tv/new/bcp-008-01/v1.0.0/Overview/">
+      
+      
+        <link rel="prev" href="./..">
+      
+      
+        <link rel="next" href="../examples/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.62">
+    
+    
+      
+        <title>Overview - AMWA BCP-008-01: NMOS Receiver Status Monitoring</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.ce62732f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/amwa-branding.css">
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#amwa-bcp-008-01-nmos-receiver-status-monitoring" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="AMWA BCP-008-01: NMOS Receiver Status Monitoring" class="md-header__button md-logo" aria-label="AMWA BCP-008-01: NMOS Receiver Status Monitoring" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AMWA BCP-008-01: NMOS Receiver Status Monitoring
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/AMWA-TV/bcp-008-01" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AMWA-TV/bcp-008-01
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="AMWA BCP-008-01: NMOS Receiver Status Monitoring" class="md-nav__button md-logo" aria-label="AMWA BCP-008-01: NMOS Receiver Status Monitoring" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    AMWA BCP-008-01: NMOS Receiver Status Monitoring
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AMWA-TV/bcp-008-01" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AMWA-TV/bcp-008-01
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AMWA BCP-008-01: NMOS Receiver Status Monitoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Introduction
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Introduction
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-of-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use of Normative Language
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definitions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prerequisites
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiver-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver monitoring
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-reporting-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status reporting delay
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-transition-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status transition counters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-overall-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver overall status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status messages
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver connectivity
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver connectivity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#link-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Link status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Connection status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#late-and-lost-packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Late and lost packets
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver synchronization
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver synchronization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-synchronization-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        External synchronization status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-source-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Synchronization source change
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-stream-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver stream validation
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver stream validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Stream status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deactivating-a-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deactivating a receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touchpoints-and-is-04-receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Touchpoints and IS-04 receivers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ncworker-inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NcWorker inheritance
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Controller
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  example.json
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-of-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use of Normative Language
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definitions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prerequisites
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiver-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver monitoring
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-reporting-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status reporting delay
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-transition-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status transition counters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-overall-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver overall status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-status-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver status messages
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver connectivity
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver connectivity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#link-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Link status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Connection status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#late-and-lost-packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Late and lost packets
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver synchronization
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver synchronization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-synchronization-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        External synchronization status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-source-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Synchronization source change
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-stream-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver stream validation
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver stream validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Stream status
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deactivating-a-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deactivating a receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touchpoints-and-is-04-receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Touchpoints and IS-04 receivers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ncworker-inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NcWorker inheritance
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Controller
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="amwa-bcp-008-01-nmos-receiver-status-monitoring">AMWA BCP-008-01: NMOS Receiver Status Monitoring</h1>
+<p><em>(c) AMWA 2021, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)</em></p>
+<p><img alt="NMOS logo" src="../images/NMOS-logo.png" /></p>
+<h2 id="introduction">Introduction</h2>
+<p>Alarms are context and workflow specific, and in general determined by a higher level monitoring system, with different calculations for different users. For example, a hardware error status (such as link down) from a device not actively being used would not cause an alarm to a live workflow operator, but the same status condition would escalate an alarm to a maintenance engineer who needs to prepare that device for future operational use.</p>
+<p>This BCP document does not attempt to define alarms but instead it describes the expectations, behavior and conformance requirements for Devices with stream Receivers in terms of status monitoring.</p>
+<p>The <a href="#receiver-overall-status">overall status</a> concepts defined in this document are intended to make it easy to calculate a typical operator alarm condition. In simple systems with no higher level monitoring system, the <code>overallStatus</code> can be used directly as a simple pre-defined non-configurable operator alarm condition, without in any way limiting a monitoring system's ability to take the same status values and calculate one or more different alarm conditions appropriate to other desired workflows or users.</p>
+<p>This document relies on previous familiarity with the following existing documents:</p>
+<ul>
+<li><a href="https://specs.amwa.tv/ms-05-02/">NMOS Control Framework</a></li>
+<li><a href="https://specs.amwa.tv/is-12/">NMOS Control Protocol</a></li>
+<li><a href="https://specs.amwa.tv/is-04/">NMOS Discovery and Registration</a></li>
+<li><a href="https://specs.amwa.tv/is-05/">NMOS Device Connection Management</a></li>
+</ul>
+<p>The technical models referenced in this document are fully published in the <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/">Monitoring NMOS Control Feature Set</a>.</p>
+<p>The following domains are covered in terms of status monitoring with specific sections for each:</p>
+<ul>
+<li><a href="#receiver-connectivity">Receiver connectivity</a></li>
+<li><a href="#receiver-synchronization">Receiver synchronization</a></li>
+<li><a href="#receiver-stream-validation">Receiver stream validation</a></li>
+</ul>
+<h2 id="use-of-normative-language">Use of Normative Language</h2>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a>.</p>
+<h2 id="definitions">Definitions</h2>
+<p>The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the <a href="https://specs.amwa.tv/nmos/main/docs/Glossary.html">NMOS Glossary</a>.</p>
+<p>Receiver activation - An <a href="https://specs.amwa.tv/is-05/latest/docs/Interoperability_-_IS-04.html#identifying-active-connections">IS-05 activation</a> which results in the Receiver having the required transport parameters and a <code>master_enable</code> status of <code>true</code>. This can happen for an idle receiver but also when the receiver is already activated and a client is applying new transport parameters.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Devices in conformance to this BCP MUST comply with <a href="https://specs.amwa.tv/ms-05-02/">NMOS Control Framework</a> for generating device models.<br />
+Devices in conformance to this BCP MUST comply with <a href="https://specs.amwa.tv/is-12/">NMOS Control Protocol</a> to expose device models via a standard API with full support for notifications.<br />
+Devices in conformance to this BCP MUST comply with <a href="https://specs.amwa.tv/is-04/">NMOS Discovery and Registration</a> to create, describe and register Nodes, Devices and Receiver resources.<br />
+Devices in conformance to this BCP MUST comply with <a href="https://specs.amwa.tv/is-05/">NMOS Device Connection Management</a> to perform connection management actions against Receiver resources.  </p>
+<h2 id="receiver-monitoring">Receiver monitoring</h2>
+<p>The technical model describing the monitoring requirements for a receiver is <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a>.</p>
+<p>This model inherits from the baseline status monitoring model <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncstatusmonitor">NcStatusMonitor</a>.</p>
+<p>Receiver monitors MUST implement <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> directly or derive a <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html">vendor specific variant from NcReceiverMonitor</a> which MAY add more statuses, properties and methods but MUST still comply with the requirements set out in this specification.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Receiver monitoring model" src="../images/receiver-model-minimal.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Receiver monitoring model</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiver-status-reporting-delay">Receiver status reporting delay</h3>
+<p>The <code>statusReportingDelay</code> property allows clients to customize the reporting delay used by devices to report statuses. Devices MUST use 3s as the default value when the receiver monitor object is first constructed and MUST allow it to be changed to values within the device's published constraints. Devices MUST allow setting the <code>statusReportingDelay</code> property to a value of 3s. All domain specific statuses are impacted by the configured <code>statusReportingDelay</code> as follows:</p>
+<ul>
+<li>
+<p>A receiver is expected to go through a period of instability upon activation. Therefore, on Receiver activation domain specific statuses offering an <code>Inactive</code> option MUST transition immediately to the Healthy state. Furthermore, after activation, as long as the Receiver isn’t being <a href="#deactivating-a-receiver">deactivated</a>, it MUST delay the reporting of non Healthy states for the duration specified by <code>statusReportingDelay</code>, and then transition to any other appropriate state.</p>
+</li>
+<li>
+<p>Once any Receiver activation <code>statusReportingDelay</code> has elapsed and the Receiver isn't being <a href="#deactivating-a-receiver">deactivated</a>, all domain specific statuses MUST delay the transition to a more healthy state by the configured <code>statusReportingDelay</code> value and MUST only make the transition if the healthier state is maintained for the duration. All domain specific statuses MUST make a transition to a less healthy state without delay.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Status reporting delay" src="../images/status-reporting-delay.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Status reporting delay example</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiver-status-transition-counters">Receiver status transition counters</h3>
+<p>All receiver specific domain statuses have an associated status transition counter property. These MUST increment each time the associated status transitions to a less healthy state. Transitions to/from neutral states like <code>Inactive</code> or <code>NotUsed</code> are ignored.</p>
+<p>The intention is that these properties store historical negative trend transitions for each status.</p>
+<p>The list of all status transition counter properties is:</p>
+<ul>
+<li>linkStatusTransitionCounter</li>
+<li>connectionStatusTransitionCounter</li>
+<li>externalSynchronizationStatusTransitionCounter</li>
+<li>streamStatusTransitionCounter</li>
+</ul>
+<p>Devices MUST be able to reset ALL status transition counter properties in the following two ways:</p>
+<ul>
+<li>When a receiver activation occurs if <code>autoResetCountersAndMessages</code> is set to <code>true</code></li>
+<li>When a client invokes the <code>ResetCountersAndMessages</code> method</li>
+</ul>
+<p>The <code>autoResetCountersAndMessages</code> property allows clients to configure if ALL counters automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset ALL counters to 0 after each activation. Devices MUST allow setting the <code>autoResetCountersAndMessages</code> property to a value of <code>true</code> and MAY allow setting the property to <code>false</code>. This supports use cases where users do not want to reset automatically after each activation.</p>
+<h3 id="receiver-overall-status">Receiver overall status</h3>
+<p>The purpose of the overallStatus is to abstract and combine the specific domain statuses of a monitor into a single status which can be more easily observed and displayed by a simple client.</p>
+<p><code>Note</code>: The overallStatus might remain the same even when specific domain statuses change. However, the overallStatusMessage might change to indicate that a different combination of internal states is causing the current overallStatus value.</p>
+<p>Where possible, Device implementations are RECOMMENDED to populate the overallStatusMessage with the root causes which led to the current PartiallyHealthy or Unhealthy overallStatus.</p>
+<p>For example, a number of domain statuses become less healthy when a network interface is down. In this case the overallStatusMessage could report the following root cause</p>
+<div class="highlight"><pre><span></span><code>NIC 1 is down
+</code></pre></div>
+<p>Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".</p>
+<p>For example, upon recovery to a healthy state the overallStatusMessage could hold the following value</p>
+<div class="highlight"><pre><span></span><code>Previously: NIC 1 is down
+</code></pre></div>
+<p>Devices MUST follow the rules listed below when mapping specific domain statuses in the combined overallStatus:</p>
+<ul>
+<li>When the Receiver is Inactive the overallStatus uses the Inactive option</li>
+<li>When the Receiver is Active the overallStatus takes the least healthy state of all domain statuses (if one status is PartiallyHealthy (or equivalent) and another is Unhealthy (or equivalent) then the overallStatus would be Unhealthy)</li>
+<li>The overallStatus is Healthy only when all domain statuses are either Healthy or a neutral state (e.g. Not used, Inactive)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Overall status mapping examples" src="../images/overall-status.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Overall status mapping examples</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiver-status-messages">Receiver status messages</h3>
+<p>The overall status and all receiver specific domain statuses have an associated status message property.
+The list of all status message properties is:</p>
+<ul>
+<li>overallStatusMessage</li>
+<li>linkStatusMessage</li>
+<li>connectionStatusMessage</li>
+<li>externalSynchronizationStatusMessage</li>
+<li>streamStatusMessage</li>
+</ul>
+<p>Resetting status message properties is achieved by assigning a value of <code>null</code> to them.</p>
+<p>Devices MUST be able to reset ALL status message properties in the following two ways:</p>
+<ul>
+<li>When a receiver activation occurs if <code>autoResetCountersAndMessages</code> is set to true</li>
+<li>When a client invokes the <code>ResetCountersAndMessages</code> method</li>
+</ul>
+<p>The <code>autoResetCountersAndMessages</code> property allows clients to configure if ALL status message properties automatically reset with each Receiver activation (by default devices MUST have this enabled). If this is enabled, receivers MUST reset ALL status message properties after each activation. Devices MUST allow setting the <code>autoResetCountersAndMessages</code> property to a value of <code>true</code> and MAY allow setting the property to <code>false</code>. This supports use cases where users do not want to reset automatically after each activation.</p>
+<h3 id="receiver-connectivity">Receiver connectivity</h3>
+<p><a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> includes the following specific items covering the connectivity domain:</p>
+<ul>
+<li>Properties</li>
+<li>linkStatus</li>
+<li>linkStatusMessage</li>
+<li>linkStatusTransitionCounter</li>
+<li>connectionStatus</li>
+<li>connectionStatusMessage</li>
+<li>connectionStatusTransitionCounter</li>
+<li>Methods</li>
+<li>GetLostPackets</li>
+<li>GetLatePackets</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Receiver connectivity" src="../images/receiver-model-connectivity.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Receiver connectivity (explanatory notes are informative)</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h4 id="link-status">Link status</h4>
+<p>The linkStatus property allows devices to expose the health of all the physical links associated with the receiver.</p>
+<p>Devices MUST report the linkStatus as follows:</p>
+<ul>
+<li>AllUp when all of the interfaces are Up (equivalent to a Healthy state)</li>
+<li>SomeDown when some of the interfaces are Down (equivalent to a PartiallyHealthy state)</li>
+<li>AllDown when all interfaces are Down (equivalent to an Unhealthy state)</li>
+</ul>
+<p>The linkStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.</p>
+<p>Devices are RECOMMENDED to publish information about which interfaces are down in the linkStatusMessage.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>NIC1, NIC2 are down
+</code></pre></div>
+<p>Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".</p>
+<p>For example, upon recovery to a healthy state the linkStatusMessage could hold the following value</p>
+<div class="highlight"><pre><span></span><code>Previously: NIC1, NIC2 are down
+</code></pre></div>
+<h4 id="connection-status">Connection status</h4>
+<p>The connectionStatus property allows devices to expose the health of the receiver with regards to receiving stream packets successfully. Other connection problems like 802.1x authorization, DHCP and other causes are also reflected in the connectionStatus.</p>
+<p>Devices MUST report the connectionStatus as follows:</p>
+<ul>
+<li>Inactive when the receiver is Inactive (this is a neutral state)</li>
+<li>Healthy when the receiver is Active and receiving all required packets without using any form of loss recovery</li>
+<li>PartiallyHealthy when the receiver is Active and is receiving all required packets but some form of loss recovery is being used (e.g. redundant leg recovery or some form of FEC)</li>
+<li>Unhealthy when the receiver is Active and is either not receiving any packets or receiving packets but has unrecoverable errors (such as late or lost packets)</li>
+</ul>
+<p>The connectionStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.</p>
+<p>Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".</p>
+<p>For example, upon recovery to a healthy state the connectionStatusMessage could hold the following value</p>
+<div class="highlight"><pre><span></span><code>Previously: Packet loss detected
+</code></pre></div>
+<h4 id="late-and-lost-packets">Late and lost packets</h4>
+<p>The receiver monitoring model provides means of gathering metrics around late and lost stream packets. These are not statuses but instead enable further analysis when <a href="#link-status">link status</a> or <a href="#connection-status">connection status</a> indicate problems (are PartiallyHealthy or Unhealthy).</p>
+<p>Lost packets are packets that never arrived. Late packets are packets that arrived but arrived too late to be usable by presentation time.</p>
+<p>Devices with capabilities to detect late or lost packets MUST implement the following methods:</p>
+<ul>
+<li>GetLostPacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report lost packets across different interfaces).</li>
+<li>GetLatePacketCounters - returns a non empty collection of counters which hold the name, description and numeric value of the counter (this allows more capable devices to report late packets across different interfaces).</li>
+</ul>
+<p>Devices with capabilities to detect late or lost packets MUST be able to reset ALL lost and late packet counters in the following two ways:</p>
+<ul>
+<li>When a receiver activation occurs if <code>autoResetCountersAndMessages</code> is set to <code>true</code></li>
+<li>When a client invokes the <code>ResetCountersAndMessages</code> method</li>
+</ul>
+<p>For implementations which cannot measure individual late packets the late counters MUST at the very least increment every time the presentation is affected due to late packet arrival.</p>
+<p>When devices do not have the capability to detect lost or late packets they MUST:</p>
+<ul>
+<li>Implement the GetLostPacketCounters method but return an empty collection</li>
+<li>Implement the GetLatePacketCounters method but return an empty collection</li>
+</ul>
+<h3 id="receiver-synchronization">Receiver synchronization</h3>
+<p><a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> includes the following specific items covering the synchronization domain:</p>
+<ul>
+<li>Properties</li>
+<li>externalSynchronizationStatus</li>
+<li>externalSynchronizationStatusMessage</li>
+<li>externalSynchronizationStatusTransitionCounter</li>
+<li>synchronizationSourceId</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Receiver synchronization" src="../images/receiver-model-synchronization.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Receiver synchronization (explanatory notes are informative)</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h4 id="external-synchronization-status">External synchronization status</h4>
+<p>The externalSynchronizationStatus property allows devices to expose the health of the receiver with regards to its synchronization mechanisms.</p>
+<p>Devices MUST report the externalSynchronizationStatus as follows:</p>
+<ul>
+<li>NotUsed when the receiver is not intending to use external synchronization or when the device is itself the synchronization source (this is a neutral state)</li>
+<li>Healthy when the receiver is locked to an external synchronization source (devices which expect synchronization from multiple interfaces are receiving it across all of them)</li>
+<li>PartiallyHealthy when the receiver is locked to an external synchronization source and is expected to receive synchronization from multiple interfaces but some are not providing synchronization (Receivers MUST also temporarily transition to this state when detecting a synchronization source change)</li>
+<li>Unhealthy when the receiver is expected to use external synchronization but is not locked to any external synchronization source</li>
+</ul>
+<p>The externalSynchronizationStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.</p>
+<p>Devices are RECOMMENDED to publish in the externalSynchronizationStatusMessage property information about the previous synchronization source and originating interface.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>Source change from: SDI1
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>Source change from: 00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+</code></pre></div>
+<p>Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".</p>
+<p>For example, upon recovery to a healthy state the externalSynchronizationStatusMessage could hold the following value</p>
+<div class="highlight"><pre><span></span><code>Previously: Source change from: SDI1
+</code></pre></div>
+<h4 id="synchronization-source-change">Synchronization source change</h4>
+<p>When devices intend to use external synchronization they MUST publish the synchronization source id currently being used in the <code>synchronizationSourceId</code> property and update the <code>externalSynchronizationStatus</code> property whenever it changes, setting the <code>synchronizationSourceId</code> to <code>null</code> if a synchronization source cannot be discovered. Devices which are not intending to use external synchronization MUST populate this property with <code>internal</code> or their own id if they themselves are the synchronization source (e.g. the device is a grandmaster).</p>
+<p>Where possible devices are RECOMMENDED to also indicate the interface used in the synchronization source id like in the following examples.</p>
+<div class="highlight"><pre><span></span><code>00:0c:ec:ff:fe:0a:2b:a1 on NIC1
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>00:1d:ec:ff:fe:0a:2b:b4, Blue
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>SDI1
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>BlackBurst 1
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>WCLK BNC1
+</code></pre></div>
+<p>When devices observe a synchronization source id change the <code>externalSynchronizationStatus</code> property MUST temporarily transition to a <code>PartiallyHealthy</code> state. It can then return to a different state if the operating conditions match it more closely (returning to a healthier state MUST respect the requirements in the <a href="#receiver-status-reporting-delay">status reporting delay section</a>). Devices capable of reporting the specific interface used in the synchronization source id MUST follow the previous transition requirement even when the only change observed is the interface now being used for synchronization.</p>
+<h3 id="receiver-stream-validation">Receiver stream validation</h3>
+<p><a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> includes the following specific items covering the stream validation domain:</p>
+<ul>
+<li>Properties</li>
+<li>streamStatus</li>
+<li>streamStatusMessage</li>
+<li>streamStatusTransitionCounter</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Receiver stream validation" src="../images/receiver-model-stream-validation.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Receiver stream validation (explanatory notes are informative)</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h4 id="stream-status">Stream status</h4>
+<p>The streamStatus property allows devices to expose the health of the receiver with regards to the validity of the stream being received.</p>
+<p>Devices MUST report the streamStatus as follows:</p>
+<ul>
+<li>Inactive when the receiver is Inactive (this is a neutral state)</li>
+<li>Healthy when the receiver is Active and can decode the incoming stream without any detected errors</li>
+<li>PartiallyHealthy when the receiver is Active and can decode the incoming stream but there are inconsistencies in the stream with what the device is expecting</li>
+<li>Unhealthy when the receiver is active and cannot decode the incoming stream</li>
+</ul>
+<p>The streamStatusMessage is a nullable property where devices MAY offer the reason and further details as to why the current status value was chosen.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>Unexpected stream format
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Payload ID in RTP stream does not match SDP file
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Parameter X does not match expectations
+</code></pre></div>
+<p>Furthermore, where possible Device implementations are RECOMMENDED to retain the previous status message when returning to a Healthy state from a PartiallyHealthy or Unhealthy state by prepending the previous message with "Previously: ".</p>
+<p>For example, upon recovery to a healthy state the streamStatusMessage could hold the following value</p>
+<div class="highlight"><pre><span></span><code>Previously: Payload ID in RTP stream does not match SDP file
+</code></pre></div>
+<h3 id="deactivating-a-receiver">Deactivating a receiver</h3>
+<p>A Receiver is deactivated after an <a href="https://specs.amwa.tv/is-05/latest/docs/Interoperability_-_IS-04.html#identifying-active-connections">IS-05 activation</a> results in the Receiver <code>master_enable</code> becoming <code>false</code>.</p>
+<p>When a receiver is being deactivated it MUST cleanly disconnect from the current stream by not generating intermediate unhealthy states (PartiallyHealthy or Unhealthy) and instead transition directly and immediately (without being delayed by the <code>statusReportingDelay</code>) to <code>Inactive</code> for the following statuses:</p>
+<ul>
+<li>overallStatus</li>
+<li>connectionStatus</li>
+<li>streamStatus</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Deactivation transition example" src="../images/deactivation.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><strong>Deactivation transition example</strong></em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="touchpoints-and-is-04-receivers">Touchpoints and IS-04 receivers</h3>
+<p>Receiver monitors make use of the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#touchpoints">Touchpoints</a> mechanism inherited from <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html">NcObject</a> to attach to the correct receiver identity.</p>
+<p>The <code>touchpoints</code> property of any <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> MUST have one or more touchpoints of which one and only one entry MUST be of type <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#nctouchpointnmos">NcTouchpointNmos</a> where the <code>resourceType</code> field MUST be set to "receiver" and the <code>id</code> field MUST be set to the associated IS-04 receiver UUID.</p>
+<p>Receiver monitors MUST maintain a 1 to 1 relationship between its role and the receiver resource it monitors (expressed via the <code>touchpoints</code> property) for the lifetime of the IS-04 receiver resource.</p>
+<p>Touchpoints example:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"contextNamespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x-nmos"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"resourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"receiver"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82fdc03f-76c7-4989-9d05-3ea2cc98875e"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="ncworker-inheritance">NcWorker inheritance</h3>
+<p><a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncstatusmonitor">NcStatusMonitor</a> inherits from the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker">NcWorker</a> model.</p>
+<p>Since <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> inherits from the <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncstatusmonitor">NcStatusMonitor</a> model then it also indirectly inherits from the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Framework.html#ncworker">NcWorker</a> model.</p>
+<p>In the case of Receiver monitors, the <code>enabled</code> property has no operational meaning and MUST NOT be interpreted in any way.</p>
+<p>Devices MAY choose to not allow changes to the <code>enabled</code> property and instead return <code>InvalidRequest</code> to Set method invocations for this property.</p>
+<h2 id="controller">Controller</h2>
+<p>Controllers MUST be capable to discover receiver monitor objects (objects which implement <a href="https://specs.amwa.tv/nmos-control-feature-sets/branches/main/monitoring/#ncreceivermonitor">NcReceiverMonitor</a> directly or derive a <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Introduction.html">vendor specific variant from NcReceiverMonitor</a>) inside a device model and indicate them to the User. All blocks inside an MS-05-02 device allow <a href="https://specs.amwa.tv/ms-05-02/latest/docs/Blocks.html#search-methods">searching for members by their class id</a>.</p>
+<p>Controllers MUST be capable to find the associated IS-04 receiver identity for each receiver monitor by using the <a href="#touchpoints-and-is-04-receivers">touchpoints</a> and indicate this relationship to the User.</p>
+<p>Controllers MUST be capable to get the current state of the overallStatus property using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Get method</a> and indicate this to the User.</p>
+<p>Controllers MUST be capable of tracking changes to the overallStatus property by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type">subscriptions and notifications</a> and reflect these changes to the User.</p>
+<p>Controllers MUST be capable to get the current state of the following status properties using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Get method</a> and indicate them to the User:</p>
+<ul>
+<li>linkStatus</li>
+<li>connectionStatus</li>
+<li>externalSynchronizationStatus</li>
+<li>streamStatus</li>
+</ul>
+<p>Controllers MUST be capable of tracking changes to the following status properties by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type">subscriptions and notifications</a> and reflect these changes to the User:</p>
+<ul>
+<li>linkStatus</li>
+<li>connectionStatus</li>
+<li>externalSynchronizationStatus</li>
+<li>streamStatus</li>
+</ul>
+<p>Controllers MUST be capable of getting the current value of ALL status message properties using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Get method</a> and indicate it to the User.</p>
+<p>Controllers MUST be capable of tracking changes to ALL the status message properties by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type">subscriptions and notifications</a> and reflect these to the User.</p>
+<p>Controllers MUST be capable of getting the current value of the synchronizationSourceId using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Get method</a> and indicate it to the User.</p>
+<p>Controllers MUST be capable of tracking changes to the synchronizationSourceId property by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type">subscriptions and notifications</a> and reflect these to the User.</p>
+<p>The values of status message properties MUST NOT be interpreted by controllers and are meant to be used verbatim and indicated to the User.</p>
+<p>Controllers SHOULD NOT open an excessive number of WebSocket connections against the same control endpoint.</p>
+<p>Controllers MUST always use subscriptions and notifications to keep track of changes to any properties of interest and not revert to a polling behaviour.</p>
+<p>Controllers MAY be capable of getting the lost packet counters from a device which offers them by invoking the GetLostPacketCounters method using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type">IS-12 commands</a> and indicating their value to the User.</p>
+<p>Controllers MAY be capable of getting the late packet counters from a device which offers them by invoking the GetLatePacketCounters method using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type">IS-12 commands</a> and indicating their value to the User.</p>
+<p>Controllers SHOULD NOT resort to a fast pace repetitive polling workflow for getting the lost packets of a device which offers them.</p>
+<p>Controllers SHOULD NOT resort to a fast pace repetitive polling workflow for getting the late packets of a device which offers them.</p>
+<p>Controllers MAY be capable to invoke the ResetCountersAndMessages method by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#command-message-type">IS-12 commands</a>.</p>
+<p>Controllers MAY be capable to set the autoResetCountersAndMessages property using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Set method</a>.</p>
+<p>Controllers MAY be capable of getting the current value of ANY status transition counter property using the <a href="https://specs.amwa.tv/ms-05-02/latest/docs/NcObject.html#generic-getter-and-setter">Get method</a> and indicate it to the User.</p>
+<p>Controllers MAY be capable of tracking changes to ANY status transition counter property by using <a href="https://specs.amwa.tv/is-12/latest/docs/Protocol_messaging.html#notification-message-type">subscriptions and notifications</a> and reflect these to the User.</p>
+<p>Controllers MAY provide a single indicator to inform the User whenever ANY of the domains have a non zero status transition counter. This single indicator complements the overallStatus by capturing situations where ANY of the domains have experienced issues since their last reset.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":[],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
+      
+        <script src="../javascripts/json-viewer.js"></script>
+      
+        <script src="../javascripts/amwa-branding.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "amwa_id": "BCP-008-01",
+  "url": "https://specs.amwa.tv/bcp-008-01",
+  "name": "NMOS Receiver Status",
+  "status": "AMWA Specification",
+  "repo_name": "bcp-008-01",
+  "alt_repo_name": "bcp-receiver-status",
+  "repo_url": "https://github.com/AMWA-TV/bcp-008-01",
+  "releases": null,
+  "default_branch": "v1.0.x",
+  "show_in_index": true,
+  "intro": {
+    "what_does_it_do": [
+      "It provides a standard way of monitoring the statuses of Receivers"
+    ],
+    "why_does_it_matter": [
+      "It offers standard models for minimum status reporting",
+      "It provides guidance, sets out expectations and requirements for receiver status monitoring"
+    ],
+    "how_does_it_work": [
+      "It documents the standard models Devices have to use in order to offer receiver status monitoring",
+      "It lists the prerequisites and dependencies in terms of NMOS specifications",
+      "It describes the status monitoring domains along with expectations, behaviour and conformance requirements"
+    ]
+  }
+}
