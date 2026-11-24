@@ -21,12 +21,6 @@
       "repository": "AMWA-TV/bcp-008-01"
     },
     {
-      "title": "README",
-      "url": "https://specs.amwa.tv/bcp-008-01/latest/images/",
-      "text": "README README README - AMWA BCP-008-01: NMOS Receiver Status Monitoring Skip to content README This directory is for images used in documentation",
-      "repository": "AMWA-TV/bcp-008-01"
-    },
-    {
       "title": "AMWA BCP-008-01: NMOS Receiver Status Monitoring",
       "url": "https://specs.amwa.tv/bcp-008-01/latest/",
       "text": "AMWA BCP-008-01: NMOS Receiver Status Monitoring AMWA BCP-008-01: NMOS Receiver Status Monitoring What does it do? Why does it matter? How does it work? Where to start? Getting started AMWA BCP-008-01: NMOS Receiver Status Monitoring - AMWA BCP-008-01: NMOS Receiver Status Monitoring Skip to content AMWA BCP-008-01: NMOS Receiver Status Monitoring This repository holds the source for this Specification, part of the family of Networked Media Open Specifications from the Advanced Media Workflow Association What does it do? It provides a standard way of monitoring the statuses of Receivers Why does it matter? It offers standard models for minimum status reporting It provides guidance, sets out expectations and requirements for receiver status monitoring How does it work? It documents the standard models Devices have to use in order to offer receiver status monitoring It lists the prerequisites and dependencies in terms of NMOS specifications It describes the status monitoring domains along with expectations, behaviour and conformance requirements Where to start? To quickly start your journey an implementation guide is available for NMOS Control . An open source media node framework is available in the form of nmos-cpp . An example mock application is available in the form of the NMOS Device Control Mock Application . A testing tool is available in the form of the NMOS API Testing Tool . This specification relies on familiarity with the following existing specifications: MS-05-02: NMOS Control Framework IS-12: NMOS Control Protocol IS-04: NMOS Discovery and Registration IS-05: NMOS Device Connection Management Getting started There is more information about the NMOS Specifications and their GitHub repos at https://specs.amwa.tv/nmos .",
